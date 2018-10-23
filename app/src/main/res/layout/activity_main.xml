@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/loginTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/trackfoodtruck"
@@ -30,16 +30,18 @@
         android:layout_marginTop="56dp"
         android:layout_marginEnd="85dp"
         android:layout_marginRight="85dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginBottom="16dp"
         android:ems="10"
-        android:hint="@string/email"
         android:gravity="center"
+        android:hint="@string/email"
         android:inputType="textEmailAddress"
+        android:textColorLink="@android:color/background_dark"
         app:layout_constraintBottom_toTopOf="@+id/loginPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        app:layout_constraintVertical_chainStyle="spread_inside" />
+        app:layout_constraintTop_toBottomOf="@+id/loginTitle"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/loginPassword"
@@ -51,13 +53,15 @@
         android:layout_marginRight="86dp"
         android:layout_marginBottom="20dp"
         android:ems="10"
-        android:hint="@string/password"
         android:gravity="center"
+        android:hint="@string/password"
         android:inputType="textPassword"
+        android:textColorLink="@android:color/background_dark"
         app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/loginEmail"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/buttonLogin"
@@ -71,7 +75,7 @@
         android:layout_marginRight="86dp"
         android:layout_marginBottom="114dp"
         android:text="@string/login"
-        android:onClick="logIn"
+        android:onClick="goTologinActivity"
         app:layout_constraintBottom_toTopOf="@+id/buttonRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +92,7 @@
         android:layout_marginRight="86dp"
         android:layout_marginBottom="8dp"
         android:text="@string/register"
-        android:onClick="register"
+        android:onClick="goToRegisterActivity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         passwordForm = findViewById(R.id.loginPassword);
     }
 
-    public void logIn(View view)
+    public void goTologinActivity(View view)
     {
         String email = emailForm.getText().toString();
         String password = passwordForm.getText().toString();
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void register(View view)
+    public void goToRegisterActivity(View view)
     {
         Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
         startActivity(intent);
