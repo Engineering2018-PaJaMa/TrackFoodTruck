@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity
 {
@@ -30,10 +33,7 @@ public class RegisterActivity extends AppCompatActivity
 		final EditText password = findViewById(R.id.passwordEditText);
 		final EditText repeatPassword = findViewById(R.id.repeatPasswordEditText);
 
-		if(!password.getText().toString().equals(repeatPassword.getText().toString())) {
-			Toast.makeText(RegisterActivity.this, "Passowrd doesn't match", Toast.LENGTH_LONG).show();
-		}
-		else {
+		if (validateName(name) && validateEmail(email) && validatePassword(password, repeatPassword)) {
 
 			try {
 				register.put("name", name.getText().toString());
@@ -46,6 +46,50 @@ public class RegisterActivity extends AppCompatActivity
 
 			Toast.makeText(RegisterActivity.this, register.toString(), Toast.LENGTH_LONG).show();
 			startActivity(intent);
+		} else {
+
+		}
+	}
+
+	private boolean validateName(EditText name) {
+		String nameInput = name.getText().toString();
+
+		if (nameInput.isEmpty()) {
+			name.setError("Name cannot be empty");
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	private boolean validatePassword(EditText password, EditText repeatPassword) {
+		String passwordInput = password.getText().toString();
+		String repeatPasswordInput = repeatPassword.getText().toString();
+
+		if (passwordInput.isEmpty()) {
+			password.setError("Password cannot be empty");
+			return false;
+		}
+		else if (passwordInput.equals(repeatPasswordInput)) {
+			return true;
+		} else {
+			password.setError("Password need to be the same");
+			return false;
+		}
+	}
+
+	private boolean validateEmail(EditText email) {
+		String emailInput = email.getText().toString().trim();
+
+		if (emailInput.isEmpty()) {
+			email.setError("Field can't be empty");
+			return false;
+		} else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+			email.setError("Please enter a valid email");
+			return false;
+		} else {
+			email.setError(null);
+			return true;
 		}
 	}
 }
