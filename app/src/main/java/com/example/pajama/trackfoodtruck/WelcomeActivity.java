@@ -32,7 +32,6 @@ public class WelcomeActivity extends AppCompatActivity
 		protected void onPreExecute()
 		{
 			super.onPreExecute();
-//			Toast.makeText(WelcomeActivity.this, "Json Data is downloading", Toast.LENGTH_LONG).show();
 		}
 
 		@Override

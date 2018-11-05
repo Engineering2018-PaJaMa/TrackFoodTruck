@@ -21,7 +21,7 @@ public class HttpHandler
 
 	public String makeServiceCall(String reqUrl)
 	{
-		String response = "dupeczki";
+		String response = "dupa";
 		try
 		{
 			URL url = new URL(reqUrl);
