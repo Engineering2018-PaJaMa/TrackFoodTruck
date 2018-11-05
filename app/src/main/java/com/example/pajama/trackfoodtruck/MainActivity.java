@@ -6,6 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -34,6 +38,18 @@ public class MainActivity extends AppCompatActivity
 		Log.i("Email: ", email);
 		Log.i(" Password: ", password);
 		Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
+
+		JSONObject login = new JSONObject();
+		try {
+			login.put("email", email);
+			login.put("password", password);
+		}
+		catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		Toast.makeText(MainActivity.this, login.toString(), Toast.LENGTH_LONG).show();
+
 		startActivity(intent);
 	}
 
