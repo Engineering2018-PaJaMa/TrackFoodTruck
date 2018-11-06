@@ -1,4 +1,6 @@
-package com.example.pajama.trackfoodtruck;
+package com.example.pajama.trackfoodtruck.Activities;
+
+import com.example.pajama.trackfoodtruck.R;
 
 import android.content.Intent;
 import android.os.Bundle;
