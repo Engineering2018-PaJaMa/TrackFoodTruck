@@ -3,6 +3,7 @@ package com.example.pajama.trackfoodtruck.Activities;
 import com.example.pajama.trackfoodtruck.R;
 import com.example.pajama.trackfoodtruck.api.HttpHandler;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -22,27 +24,17 @@ import android.widget.Toast;
 public class WelcomeActivity extends AppCompatActivity
 {
 
-	TextView userIdTextView;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
 
-		Toolbar myToolbar = (Toolbar) findViewById(R.id.WelcomeActivityToolbar);
+		Toolbar myToolbar = findViewById(R.id.ActivityToolbar);
 		setSupportActionBar(myToolbar);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-		//userIdTextView = findViewById(R.id.userResponseTextView);
 		new User().execute();
-		createTable();
-	}
-
-
-	public void createTable()
-	{
-
 	}
 
 	private class User extends AsyncTask<Void, Void, Void>
@@ -71,7 +63,6 @@ public class WelcomeActivity extends AppCompatActivity
 		protected void onPostExecute(Void result)
 		{
 			super.onPostExecute(result);
-			//userIdTextView.setText(jsonStr);
 		}
 	}
 
@@ -88,6 +79,8 @@ public class WelcomeActivity extends AppCompatActivity
 		switch (item.getItemId()) {
 			case R.id.action_favourite:
 
+				Intent intent = new Intent(WelcomeActivity.this, FavouriteActivity.class);
+				startActivity(intent);
 				return true;
 
 			default:

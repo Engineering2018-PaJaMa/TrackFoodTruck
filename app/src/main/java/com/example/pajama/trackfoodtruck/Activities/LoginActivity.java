@@ -7,17 +7,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity
+public class LoginActivity extends AppCompatActivity
 {
 
 	TextView emailForm;
 	TextView passwordForm;
-	TableLayout tableMain;
-
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -31,7 +27,6 @@ public class MainActivity extends AppCompatActivity
 	{
 		emailForm = findViewById(R.id.loginEmail);
 		passwordForm = findViewById(R.id.loginPassword);
-		tableMain = findViewById(R.id.mainTable);
 	}
 
 	public void goTologinActivity(View view)
@@ -40,13 +35,13 @@ public class MainActivity extends AppCompatActivity
 		String password = passwordForm.getText().toString();
 		Log.i("Email: ", email);
 		Log.i(" Password: ", password);
-		Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
+		Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
 		startActivity(intent);
 	}
 
 	public void goToRegisterActivity(View view)
 	{
-		Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+		Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
 		startActivity(intent);
 	}
 }

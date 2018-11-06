@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">TrackFoodTruck</string>
-    <string name="trackfoodtruck">TrackFoodTruck</string>
-    <string name="email">Email</string>
-    <string name="login">Login</string>
-    <string name="register">Register</string>
-    <string name="button">Button</string>
-    <string name="repeat_password">Repeat Password</string>
-    <string name="name">Name</string>
-    <string name="password">Password</string>
+	<string name="app_name">TrackFoodTruck</string>
+	<string name="trackfoodtruck">TrackFoodTruck</string>
+	<string name="email">Email</string>
+	<string name="login">Login</string>
+	<string name="register">Register</string>
+	<string name="button">Button</string>
+	<string name="repeat_password">Repeat Password</string>
+	<string name="name">Name</string>
+	<string name="password">Password</string>
 </resources>
