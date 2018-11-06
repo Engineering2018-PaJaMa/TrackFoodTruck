@@ -1,5 +1,7 @@
 package com.example.pajama.trackfoodtruck.Activities;
 
+import java.util.Objects;
+
 import com.example.pajama.trackfoodtruck.R;
 
 import android.content.Intent;
@@ -19,7 +21,7 @@ public class RegisterActivity extends AppCompatActivity
 
 		Toolbar myToolbar = findViewById(R.id.ActivityToolbar);
 		setSupportActionBar(myToolbar);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
+		Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 	}
 
 	public void registerUser(View view)

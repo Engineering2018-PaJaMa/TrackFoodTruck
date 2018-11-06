@@ -1,5 +1,7 @@
 package com.example.pajama.trackfoodtruck.Activities;
 
+import java.util.Objects;
+
 import com.example.pajama.trackfoodtruck.R;
 import com.example.pajama.trackfoodtruck.api.HttpHandler;
 
@@ -32,7 +34,7 @@ public class WelcomeActivity extends AppCompatActivity
 
 		Toolbar myToolbar = findViewById(R.id.ActivityToolbar);
 		setSupportActionBar(myToolbar);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
+		Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
 		new User().execute();
 	}
