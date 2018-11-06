@@ -3,13 +3,19 @@ package com.example.pajama.trackfoodtruck.Activities;
 import com.example.pajama.trackfoodtruck.R;
 import com.example.pajama.trackfoodtruck.api.HttpHandler;
 
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,8 +34,15 @@ public class WelcomeActivity extends AppCompatActivity
 		setSupportActionBar(myToolbar);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-		userIdTextView = findViewById(R.id.userResponseTextView);
+		//userIdTextView = findViewById(R.id.userResponseTextView);
 		new User().execute();
+		createTable();
+	}
+
+
+	public void createTable()
+	{
+
 	}
 
 	private class User extends AsyncTask<Void, Void, Void>
@@ -58,7 +71,7 @@ public class WelcomeActivity extends AppCompatActivity
 		protected void onPostExecute(Void result)
 		{
 			super.onPostExecute(result);
-			userIdTextView.setText(jsonStr);
+			//userIdTextView.setText(jsonStr);
 		}
 	}
 
@@ -74,17 +87,11 @@ public class WelcomeActivity extends AppCompatActivity
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.action_favourite:
-				// User chose the "Settings" item, show the app settings UI...
+
 				return true;
 
-//			case R.id.action_favorite:
-//				// User chose the "Favorite" action, mark the current item
-//				// as a favorite...
-//				return true;
-
 			default:
-				// If we got here, the user's action was not recognized.
-				// Invoke the superclass to handle it.
+
 				return super.onOptionsItemSelected(item);
 
 		}

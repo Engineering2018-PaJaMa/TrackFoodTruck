@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
@@ -14,6 +15,9 @@ public class MainActivity extends AppCompatActivity
 
 	TextView emailForm;
 	TextView passwordForm;
+	TableLayout tableMain;
+
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -27,6 +31,7 @@ public class MainActivity extends AppCompatActivity
 	{
 		emailForm = findViewById(R.id.loginEmail);
 		passwordForm = findViewById(R.id.loginPassword);
+		tableMain = findViewById(R.id.mainTable);
 	}
 
 	public void goTologinActivity(View view)
