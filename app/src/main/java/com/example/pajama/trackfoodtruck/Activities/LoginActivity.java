@@ -1,4 +1,6 @@
-package com.example.pajama.trackfoodtruck;
+package com.example.pajama.trackfoodtruck.Activities;
+
+import com.example.pajama.trackfoodtruck.R;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity
+public class LoginActivity extends AppCompatActivity
 {
 
 	TextView emailForm;
@@ -33,13 +35,13 @@ public class MainActivity extends AppCompatActivity
 		String password = passwordForm.getText().toString();
 		Log.i("Email: ", email);
 		Log.i(" Password: ", password);
-		Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
+		Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
 		startActivity(intent);
 	}
 
 	public void goToRegisterActivity(View view)
 	{
-		Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+		Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
 		startActivity(intent);
 	}
 }
