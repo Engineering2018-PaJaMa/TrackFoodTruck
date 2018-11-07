@@ -1,6 +1,7 @@
 package com.example.pajama.trackfoodtruck;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,6 +11,12 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.DataOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -47,11 +54,12 @@ public class MainActivity extends AppCompatActivity
 		catch (JSONException e) {
 			e.printStackTrace();
 		}
-
+		new JsonRequest(MainActivity.this).execute("http://10.0.2.2:8080/tft/user/", login.toString());
 		Toast.makeText(MainActivity.this, login.toString(), Toast.LENGTH_LONG).show();
 
-		startActivity(intent);
+		//startActivity(intent);
 	}
+
 
 	public void goToRegisterActivity(View view)
 	{
