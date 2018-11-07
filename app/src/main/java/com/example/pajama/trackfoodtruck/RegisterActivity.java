@@ -47,9 +47,8 @@ public class RegisterActivity extends AppCompatActivity
 		if (nameInput.isEmpty()) {
 			name.setError("Name cannot be empty");
 			return false;
-		} else {
-			return true;
 		}
+		return true;
 	}
 
 	private boolean validatePassword(EditText password, EditText repeatPassword) {
