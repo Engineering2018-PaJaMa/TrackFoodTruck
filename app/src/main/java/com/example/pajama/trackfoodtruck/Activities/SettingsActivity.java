@@ -12,14 +12,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-public class FavouriteActivity extends AppCompatActivity
+public class SettingsActivity extends AppCompatActivity
 {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_favourite);
+		setContentView(R.layout.activity_settings);
 
 		Toolbar myToolbar = findViewById(R.id.ActivityToolbar);
 		setSupportActionBar(myToolbar);
@@ -37,9 +37,9 @@ public class FavouriteActivity extends AppCompatActivity
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case R.id.action_favourite:
+			case R.id.action_settings:
 
-				Intent intent = new Intent(FavouriteActivity.this, WelcomeActivity.class);
+				Intent intent = new Intent(SettingsActivity.this, WelcomeActivity.class);
 				startActivity(intent);
 				return true;
 

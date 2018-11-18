@@ -2,25 +2,24 @@ package com.example.pajama.trackfoodtruck.Activities;
 
 import java.util.Objects;
 
+import com.example.pajama.trackfoodtruck.Fragments.FavouriteFragment;
+import com.example.pajama.trackfoodtruck.Fragments.HomeFragment;
+import com.example.pajama.trackfoodtruck.Fragments.MapFragment;
 import com.example.pajama.trackfoodtruck.R;
 import com.example.pajama.trackfoodtruck.api.HttpHandler;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class WelcomeActivity extends AppCompatActivity
@@ -35,7 +34,10 @@ public class WelcomeActivity extends AppCompatActivity
 		Toolbar myToolbar = findViewById(R.id.ActivityToolbar);
 		setSupportActionBar(myToolbar);
 		Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+		BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
+		bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+		loadFragment(new HomeFragment());
 		new User().execute();
 	}
 
@@ -79,9 +81,9 @@ public class WelcomeActivity extends AppCompatActivity
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case R.id.action_favourite:
+			case R.id.action_settings:
 
-				Intent intent = new Intent(WelcomeActivity.this, FavouriteActivity.class);
+				Intent intent = new Intent(WelcomeActivity.this, SettingsActivity.class);
 				startActivity(intent);
 				return true;
 
@@ -91,4 +93,39 @@ public class WelcomeActivity extends AppCompatActivity
 
 		}
 	}
+	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+			= new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+		@Override
+		public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+			Fragment fragment;
+
+			switch (item.getItemId()) {
+				case R.id.navigation_home:
+					fragment = new HomeFragment();
+					loadFragment(fragment);
+					return true;
+				case R.id.navigation_favourite:
+					fragment = new FavouriteFragment();
+					loadFragment(fragment);
+					return true;
+				case R.id.navigation_map:
+					fragment = new MapFragment();
+					loadFragment(fragment);
+					return true;
+			}
+
+			return false;
+		}
+	};
+
+	private void loadFragment(Fragment fragment) {
+		// load fragment
+		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+		transaction.replace(R.id.container, fragment);
+		transaction.addToBackStack(null);
+		transaction.commit();
+	}
+
 }

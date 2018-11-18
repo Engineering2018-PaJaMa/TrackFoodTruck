@@ -21,7 +21,7 @@
 		</activity>
 		<activity android:name=".Activities.RegisterActivity"/>
 		<activity android:name=".Activities.WelcomeActivity"/>
-		<activity android:name=".Activities.FavouriteActivity">
+		<activity android:name=".Activities.SettingsActivity">
 		</activity>
 	</application>
 

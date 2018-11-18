@@ -7,14 +7,9 @@
 	      app:showAsAction="collapseActionView|ifRoom"
 	      app:actionViewClass="android.widget.SearchView"/>
 
-	<item android:id="@+id/action_favourite"
-	      android:title="favourite"
-	      android:icon="@drawable/ic_favourite"
-	      app:showAsAction="always"/>
-
-	<item android:id="@+id/action_map"
-	      android:title="map"
-	      android:icon="@drawable/ic_map"
+	<item android:id="@+id/action_settings"
+	      android:title="settings"
+	      android:icon="@drawable/ic_settings"
 	      app:showAsAction="always"/>
 
 </menu>
