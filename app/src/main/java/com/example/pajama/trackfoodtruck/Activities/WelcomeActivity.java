@@ -7,6 +7,7 @@ import com.example.pajama.trackfoodtruck.Fragments.HomeFragment;
 import com.example.pajama.trackfoodtruck.Fragments.MapFragment;
 import com.example.pajama.trackfoodtruck.R;
 import com.example.pajama.trackfoodtruck.api.HttpHandler;
+import com.example.pajama.trackfoodtruck.userData.User;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -20,7 +21,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 
 public class WelcomeActivity extends AppCompatActivity
 {
@@ -38,13 +43,11 @@ public class WelcomeActivity extends AppCompatActivity
 		bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 		loadFragment(new HomeFragment());
-		new User().execute();
+		new HttpRequestTask().execute();
 	}
 
-	private class User extends AsyncTask<Void, Void, Void>
+	private class HttpRequestTask extends AsyncTask<Void, Void, User>
 	{
-
-		String jsonStr;
 
 		@Override
 		protected void onPreExecute()
@@ -54,19 +57,18 @@ public class WelcomeActivity extends AppCompatActivity
 		}
 
 		@Override
-		protected Void doInBackground(Void... arg0)
-		{
-			final HttpHandler httpHandler = new HttpHandler();
-			//            final String url = "http://127.0.0.1:8080/tft/user/1";    //Testing on device
-			final String url = "http://10.0.2.2:8080/tft/user/1";       //Testing on emulator since emulator has its own localhost we need to redirect it to our backend localhost.
-			jsonStr = httpHandler.makeServiceCall(url);
-			return null;
+		protected User doInBackground(Void... arg0) {
+			final String url = "http://192.168.1.110:8080/tft/user/1"; // the  url from where to fetch data(json)
+			RestTemplate restTemplate = new RestTemplate();
+			restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
+			return restTemplate.getForObject(url, User.class);
 		}
 
 		@Override
-		protected void onPostExecute(Void result)
-		{
-			super.onPostExecute(result);
+		protected void onPostExecute(User user) {
+			TextView infoIdText = (TextView) findViewById(R.id.example_user);
+			infoIdText.setText(user.getUsername());
 		}
 	}
 
