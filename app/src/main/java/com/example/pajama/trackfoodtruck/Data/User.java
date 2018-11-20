@@ -1,4 +1,6 @@
-package com.example.pajama.trackfoodtruck.userData;
+package com.example.pajama.trackfoodtruck.Data;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Set;
 
@@ -11,7 +13,7 @@ public class User {
     private String name;
     private String surname;
     private int age;
-    //private Set<String> favouriteFoodTrucks;
+    private Set<String> favouriteFoodTrucks;
 
     public User(String id, String username, String password, String lastlogin, String name, String surname, int age) {
         this.id = id;
@@ -22,6 +24,10 @@ public class User {
         this.surname = surname;
         this.age = age;
         //this.favouriteFoodTrucks = favouriteFoodTrucks;
+    }
+
+    public User() {
+        super();
     }
 
     public String getId() {
@@ -52,9 +58,9 @@ public class User {
         return age;
     }
 
-//    public Set<String> getFavouriteFoodTrucks() {
-//        return favouriteFoodTrucks;
-//    }
+    public Set<String> getFavouriteFoodTrucks() {
+        return favouriteFoodTrucks;
+    }
 
 
 }

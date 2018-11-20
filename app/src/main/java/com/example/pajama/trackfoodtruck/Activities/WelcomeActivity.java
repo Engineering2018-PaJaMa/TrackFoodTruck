@@ -2,13 +2,15 @@ package com.example.pajama.trackfoodtruck.Activities;
 
 import java.util.Objects;
 
+import com.example.pajama.trackfoodtruck.Data.FoodTruck;
 import com.example.pajama.trackfoodtruck.Fragments.FavouriteFragment;
 import com.example.pajama.trackfoodtruck.Fragments.HomeFragment;
 import com.example.pajama.trackfoodtruck.Fragments.MapFragment;
 import com.example.pajama.trackfoodtruck.R;
+import com.example.pajama.trackfoodtruck.httpTruckController.HttpTruckInterface;
 import com.example.pajama.trackfoodtruck.httpUserController.HttpUserInterface;
 import com.example.pajama.trackfoodtruck.httpUserController.HttpGetUser;
-import com.example.pajama.trackfoodtruck.userData.User;
+import com.example.pajama.trackfoodtruck.Data.User;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,7 +25,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class WelcomeActivity extends AppCompatActivity implements HttpUserInterface
+public class WelcomeActivity extends AppCompatActivity implements HttpUserInterface, HttpTruckInterface
 {
 
 	@Override
@@ -106,7 +108,7 @@ public class WelcomeActivity extends AppCompatActivity implements HttpUserInterf
     public void httpGetUser(User user) {
         TextView testUser = (TextView) findViewById(R.id.example_user);
 
-        testUser.setText(user.getUsername());
+        testUser.setText(user.getId());
     }
 
     @Override
@@ -116,4 +118,8 @@ public class WelcomeActivity extends AppCompatActivity implements HttpUserInterf
         putOk.setText(info);
     }
 
+    @Override
+    public void getTruck(FoodTruck truck) {
+
+    }
 }

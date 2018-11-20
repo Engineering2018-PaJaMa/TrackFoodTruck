@@ -10,8 +10,7 @@
 	<TextView
 		android:id="@+id/example_user"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:text="Home" />
+        android:layout_height="match_parent" />
 
     <TextView
         android:id="@+id/put_ok"

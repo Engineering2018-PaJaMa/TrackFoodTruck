@@ -1,6 +1,6 @@
 package com.example.pajama.trackfoodtruck.httpUserController;
 
-import com.example.pajama.trackfoodtruck.userData.User;
+import com.example.pajama.trackfoodtruck.Data.User;
 
 public interface HttpUserInterface {
 
