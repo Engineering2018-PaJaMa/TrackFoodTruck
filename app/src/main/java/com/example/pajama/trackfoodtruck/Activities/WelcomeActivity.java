@@ -108,7 +108,6 @@ public class WelcomeActivity extends AppCompatActivity implements HttpUserInterf
     public void httpGetUser(User user) {
         TextView testUser = (TextView) findViewById(R.id.example_user);
 
-        testUser.setText(user.getId());
     }
 
     @Override

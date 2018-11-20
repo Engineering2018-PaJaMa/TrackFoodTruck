@@ -1,65 +1,42 @@
 package com.example.pajama.trackfoodtruck.Data;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.Set;
-
 public class User {
 
-    private String id;
-    private String username;
+    private String login;
     private String password;
-    private String lastlogin;
-    private String name;
-    private String surname;
-    private int age;
-    private Set<String> favouriteFoodTrucks;
+    private String repPassword;
+    private String email;
 
-    public User(String id, String username, String password, String lastlogin, String name, String surname, int age) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.lastlogin = lastlogin;
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
-        //this.favouriteFoodTrucks = favouriteFoodTrucks;
+    public String getLogin() {
+        return login;
     }
 
-    public User() {
-        super();
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getUsername() {
-        return username;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public String getLastlogin() {
-        return lastlogin;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getRepPassword() {
+        return repPassword;
     }
 
-    public String getSurname() {
-        return surname;
+    public void setRepPassword(String repPassword) {
+        this.repPassword = repPassword;
     }
 
-    public int getAge() {
-        return age;
+    public String getEmail() {
+        return email;
     }
 
-    public Set<String> getFavouriteFoodTrucks() {
-        return favouriteFoodTrucks;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 
