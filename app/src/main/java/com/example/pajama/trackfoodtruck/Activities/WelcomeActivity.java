@@ -6,11 +6,11 @@ import com.example.pajama.trackfoodtruck.Fragments.FavouriteFragment;
 import com.example.pajama.trackfoodtruck.Fragments.HomeFragment;
 import com.example.pajama.trackfoodtruck.Fragments.MapFragment;
 import com.example.pajama.trackfoodtruck.R;
-import com.example.pajama.trackfoodtruck.api.HttpHandler;
+import com.example.pajama.trackfoodtruck.httpUserController.HttpUserInterface;
+import com.example.pajama.trackfoodtruck.httpUserController.HttpGetUser;
 import com.example.pajama.trackfoodtruck.userData.User;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -22,12 +22,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
-
-public class WelcomeActivity extends AppCompatActivity
+public class WelcomeActivity extends AppCompatActivity implements HttpUserInterface
 {
 
 	@Override
@@ -43,34 +39,10 @@ public class WelcomeActivity extends AppCompatActivity
 		bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 		loadFragment(new HomeFragment());
-		new HttpRequestTask().execute();
+        new HttpGetUser().execute();
 	}
 
-	private class HttpRequestTask extends AsyncTask<Void, Void, User>
-	{
 
-		@Override
-		protected void onPreExecute()
-		{
-			super.onPreExecute();
-			Toast.makeText(WelcomeActivity.this, "Json Data is downloading", Toast.LENGTH_LONG).show();
-		}
-
-		@Override
-		protected User doInBackground(Void... arg0) {
-			final String url = "http://192.168.1.110:8080/tft/user/1"; // the  url from where to fetch data(json)
-			RestTemplate restTemplate = new RestTemplate();
-			restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-
-			return restTemplate.getForObject(url, User.class);
-		}
-
-		@Override
-		protected void onPostExecute(User user) {
-			TextView infoIdText = (TextView) findViewById(R.id.example_user);
-			infoIdText.setText(user.getUsername());
-		}
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
@@ -129,5 +101,19 @@ public class WelcomeActivity extends AppCompatActivity
 		transaction.addToBackStack(null);
 		transaction.commit();
 	}
+
+    @Override
+    public void httpGetUser(User user) {
+        TextView testUser = (TextView) findViewById(R.id.example_user);
+
+        testUser.setText(user.getUsername());
+    }
+
+    @Override
+    public void httpPutUser(String info) {
+
+        TextView putOk = (TextView) findViewById(R.id.put_ok);
+        putOk.setText(info);
+    }
 
 }

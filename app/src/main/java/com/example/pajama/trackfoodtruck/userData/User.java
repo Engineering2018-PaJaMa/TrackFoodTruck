@@ -11,7 +11,18 @@ public class User {
     private String name;
     private String surname;
     private int age;
-    private Set<String> favouriteFoodTrucks;
+    //private Set<String> favouriteFoodTrucks;
+
+    public User(String id, String username, String password, String lastlogin, String name, String surname, int age) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.lastlogin = lastlogin;
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+        //this.favouriteFoodTrucks = favouriteFoodTrucks;
+    }
 
     public String getId() {
         return id;
@@ -41,9 +52,9 @@ public class User {
         return age;
     }
 
-    public Set<String> getFavouriteFoodTrucks() {
-        return favouriteFoodTrucks;
-    }
+//    public Set<String> getFavouriteFoodTrucks() {
+//        return favouriteFoodTrucks;
+//    }
 
 
 }
