@@ -2,10 +2,11 @@ package com.example.pajama.trackfoodtruck.Data;
 
 public class User {
 
-    private String login;
-    private String password;
-    private String repPassword;
-    private String email;
+	private String login;
+
+	private String password;
+
+	private String email;
 
     public String getLogin() {
         return login;
@@ -21,14 +22,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getRepPassword() {
-        return repPassword;
-    }
-
-    public void setRepPassword(String repPassword) {
-        this.repPassword = repPassword;
     }
 
     public String getEmail() {

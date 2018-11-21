@@ -1,5 +1,8 @@
 package com.example.pajama.trackfoodtruck.httpUserController;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
@@ -8,7 +11,8 @@ import com.example.pajama.trackfoodtruck.Data.User;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class HttpGetUser extends AsyncTask<Void, Void, User> {
+public class HttpGetUser extends AsyncTask<String, Void, User>
+{
 
     @Override
     protected void onPreExecute() {
@@ -16,11 +20,31 @@ public class HttpGetUser extends AsyncTask<Void, Void, User> {
     }
 
     @Override
-    protected User doInBackground(Void... arg) {
+	protected User doInBackground(String... arg)
+	{
         final String url = "http://192.168.1.110:8080/tft/user"; // the  url from where to fetch data(json) ip kompa
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-        return restTemplate.getForObject(url, User.class);
+
+		JSONObject newUser = null;
+		try
+		{
+			newUser = new JSONObject().put("login", "").put("password", arg[1]).put("email", arg[0]);
+		}
+		catch (JSONException e)
+		{
+			Log.e("Error", "Problem with getting user");
+		}
+
+		//		HttpHeaders requestHeaders = new HttpHeaders();
+		//		requestHeaders.setContentType(new MediaType("application", "json"));
+		//		HttpEntity<String> requestEntity = new HttpEntity<>(newUser.toString(), requestHeaders);
+		//
+		restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+		restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+		//
+		//		ResponseEntity<User> responseEntity = restTemplate.exchange(url, HttpMethod.POST, requestEntity, User.class);
+
+		return restTemplate.postForObject(url, newUser.toString(), User.class);
     }
 
     @Override

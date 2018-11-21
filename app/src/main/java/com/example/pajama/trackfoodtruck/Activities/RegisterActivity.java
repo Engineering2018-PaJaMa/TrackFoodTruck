@@ -37,9 +37,7 @@ public class RegisterActivity extends AppCompatActivity
 		HttpPutUser userProcess = new HttpPutUser();
 		userProcess.execute(
                 name.getText().toString(),
-                email.getText().toString(),
-                password.getText().toString(),
-                repeatPassword.getText().toString());
+                email.getText().toString(), password.getText().toString());
 		if (userProcess.get())
 		{
 			Log.e("Register user", "Sending data for register complete");

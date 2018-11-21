@@ -1,41 +1,61 @@
 package com.example.pajama.trackfoodtruck.Data;
 
-public class Review {
+public class Review
+{
 
-    private String headline;
-    private String body;
-    private Double rating;
-    private String authorName;
+	private String restaurantName;
+	private String headline;
+	private String body;
+	private Double rating;
+	private String author;
 
-    public String getHeadline() {
-        return headline;
-    }
+	public String getRestaurantName()
+	{
+		return restaurantName;
+	}
 
-    public void setHeadline(String headline) {
-        this.headline = headline;
-    }
+	public void setRestaurantName(String restaurantName)
+	{
+		this.restaurantName = restaurantName;
+	}
 
-    public String getBody() {
-        return body;
-    }
+	public String getAuthor()
+	{
+		return author;
+	}
 
-    public void setBody(String body) {
-        this.body = body;
-    }
+	public void setAuthor(String author)
+	{
+		this.author = author;
+	}
 
-    public Double getRating() {
-        return rating;
-    }
+	public String getHeadline()
+	{
+		return headline;
+	}
 
-    public void setRating(Double rating) {
-        this.rating = rating;
-    }
+	public void setHeadline(String headline)
+	{
+		this.headline = headline;
+	}
 
-    public String getAuthorName() {
-        return authorName;
-    }
+	public String getBody()
+	{
+		return body;
+	}
 
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
-    }
+	public void setBody(String body)
+	{
+		this.body = body;
+	}
+
+	public Double getRating()
+	{
+		return rating;
+	}
+
+	public void setRating(Double rating)
+	{
+		this.rating = rating;
+	}
 }
