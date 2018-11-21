@@ -33,9 +33,10 @@ public class HttpPutUser extends AsyncTask<String, Void, Void> {
 
         User newUser = new User();
         newUser.setLogin(arg[0]);
-        newUser.setPassword(arg[1]);
-        newUser.setRepPassword(arg[2]);
-        newUser.setEmail(arg[3]);
+        newUser.setEmail(arg[1]);
+        newUser.setPassword(arg[2]);
+        newUser.setRepPassword(arg[3]);
+       
 
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.setContentType(new MediaType("application", "json"));
