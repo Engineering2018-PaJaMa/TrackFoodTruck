@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+	<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent" android:layout_weight="1">
+		<TextView
+				android:text="12 czerwca"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:id="@+id/detailDateTextView" android:layout_weight="100"/>
+		<RatingBar
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:id="@+id/ratingBar2" android:layout_weight="1"
+				style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
+				android:numStars="5" android:rating="3"
+		/>
+	</LinearLayout>
+	<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent" android:layout_weight="1">
+		<TextView
+				android:text="Super jedzenie, mega, rewelacja, no chodzilby, wow"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" android:id="@+id/reviewTextView"/>
+	</LinearLayout>
+	<TextView
+			android:text="Andrzej"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" android:id="@+id/detailsAuthorReviewextView" android:layout_weight="1" android:gravity="right"/>
+</LinearLayout>

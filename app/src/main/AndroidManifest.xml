@@ -23,6 +23,8 @@
 		<activity android:name=".Activities.WelcomeActivity"/>
 		<activity android:name=".Activities.SettingsActivity">
 		</activity>
+		<activity android:name=".Activities.DetailsActivity">
+		</activity>
 	</application>
 
 </manifest>
