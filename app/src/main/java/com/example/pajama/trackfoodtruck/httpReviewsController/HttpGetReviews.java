@@ -8,7 +8,6 @@ import com.example.pajama.trackfoodtruck.Data.Review;
 import android.os.AsyncTask;
 
 public class HttpGetReviews extends AsyncTask<Void, Void, Review> {
-	private HttpReviewsIntrface httpReviewsIntreface;
 
     @Override
     protected void onPreExecute() {
@@ -25,7 +24,6 @@ public class HttpGetReviews extends AsyncTask<Void, Void, Review> {
 
     @Override
     protected void onPostExecute(Review review) {
-        httpReviewsIntreface.getReviews(review);
         super.onPostExecute(review);
     }
 }

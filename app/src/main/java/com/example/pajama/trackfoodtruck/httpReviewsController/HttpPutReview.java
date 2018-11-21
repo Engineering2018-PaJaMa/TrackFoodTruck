@@ -14,8 +14,8 @@ import com.example.pajama.trackfoodtruck.Data.Review;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class HttpPutReview extends AsyncTask<String, Void, Void> {
-	private HttpReviewsIntrface httpReviewsIntreface;
+public class HttpPutReview extends AsyncTask<String, Void, Boolean>
+{
 
     @Override
     protected void onPreExecute() {
@@ -23,7 +23,8 @@ public class HttpPutReview extends AsyncTask<String, Void, Void> {
     }
 
 	@Override
-    protected Void doInBackground(String... arg) {
+	protected Boolean doInBackground(String... arg)
+	{
         final String url = "http://192.168.1.110:8080/tft/review/" + arg[0]; // the  url from where to fetch data(json)
         RestTemplate restTemplate = new RestTemplate(true);
 
@@ -44,12 +45,12 @@ public class HttpPutReview extends AsyncTask<String, Void, Void> {
         String result = responseEntity.getBody();
         Log.e("Review send log:", result);
 
-        return null;
+		return true;
     }
 
     @Override
-    protected void onPostExecute(Void result) {
-        httpReviewsIntreface.putReview("Review succesful send!");
+	protected void onPostExecute(Boolean result)
+	{
         super.onPostExecute(result);
     }
 }

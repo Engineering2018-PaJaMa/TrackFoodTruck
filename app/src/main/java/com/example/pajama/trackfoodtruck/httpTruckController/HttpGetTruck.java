@@ -1,15 +1,14 @@
 package com.example.pajama.trackfoodtruck.httpTruckController;
 
-import android.os.AsyncTask;
-import android.util.Log;
-
-import com.example.pajama.trackfoodtruck.Data.FoodTruck;
-
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.pajama.trackfoodtruck.Data.FoodTruck;
+
+import android.os.AsyncTask;
+import android.util.Log;
+
 public class HttpGetTruck extends AsyncTask<Void, Void, FoodTruck> {
-    private HttpTruckInterface httpTruckInterface;
 
     @Override
     protected void onPreExecute() {
@@ -26,7 +25,6 @@ public class HttpGetTruck extends AsyncTask<Void, Void, FoodTruck> {
 
     @Override
     protected void onPostExecute(FoodTruck foodTruck) {
-        httpTruckInterface.getTruck(foodTruck);
         Log.e("FoodTruck get log:", foodTruck.toString());
         super.onPostExecute(foodTruck);
     }

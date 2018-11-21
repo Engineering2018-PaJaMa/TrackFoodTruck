@@ -14,17 +14,17 @@ import com.example.pajama.trackfoodtruck.Data.User;
 import android.os.AsyncTask;
 import android.util.Log;
 
+public class HttpPutUser extends AsyncTask<String, Void, Boolean>
+{
 
-public class HttpPutUser extends AsyncTask<String, Void, Void> {
-    private HttpUserInterface httpUserInterface;
-
-    @Override
+	@Override
     protected void onPreExecute() {
         super.onPreExecute();
     }
 
     @Override
-    protected Void doInBackground(String... arg) {
+	protected Boolean doInBackground(String... arg)
+	{
         final String url = "http://192.168.1.110:8080/tft/user"; // the  url from where to fetch data(json)
         RestTemplate restTemplate = new RestTemplate(true);
 
@@ -46,12 +46,12 @@ public class HttpPutUser extends AsyncTask<String, Void, Void> {
         String result = responseEntity.getBody();
         Log.e("User send log: ", result);
 
-		return null;
+		return true;
     }
 
-    @Override
-    protected void onPostExecute(Void result) {
-        httpUserInterface.httpPutUser("Sending data complete");
-        super.onPostExecute(result);
+	@Override
+	protected void onPostExecute(Boolean result)
+	{
+		super.onPostExecute(result);
     }
 }
