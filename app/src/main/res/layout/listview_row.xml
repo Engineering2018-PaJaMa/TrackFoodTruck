@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+
+	<ImageView
+			android:id="@+id/foodTruckimageView"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			app:srcCompat="@drawable/foodtrucksample"/>
+
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="5"
+			android:gravity="center_vertical"
+			android:orientation="vertical" android:layout_marginLeft="10dp">
+
+		<TextView
+				android:id="@+id/foodTruckNameTextView"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="FoodTruckName"
+				android:textSize="24sp"
+				android:textStyle="bold"/>
+
+		<TextView
+				android:id="@+id/foodTruckInfoTextView"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="CuisinesName"
+				android:textSize="18sp"/>
+		<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+			<TextView
+					android:text="Open"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:id="@+id/openCloseTextView" android:layout_weight="50"/>
+			<RatingBar
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					style="?android:attr/ratingBarStyleSmall"
+					android:id="@+id/ratingBar" android:numStars="5" android:rating="3"/>
+		</LinearLayout>
+	</LinearLayout>
+</LinearLayout>
