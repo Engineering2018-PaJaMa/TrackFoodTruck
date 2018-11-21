@@ -34,15 +34,15 @@ public class RegisterActivity extends AppCompatActivity
 
 	public void registerUser(View view) throws ExecutionException, InterruptedException
 	{
-		HttpPutUser userToSend = new HttpPutUser();
-		userToSend.execute(
+		HttpPutUser userProcess = new HttpPutUser();
+		userProcess.execute(
                 name.getText().toString(),
                 email.getText().toString(),
                 password.getText().toString(),
                 repeatPassword.getText().toString());
-		if (userToSend.get())
+		if (userProcess.get())
 		{
-			Log.e("TEST", "Sending data complete");
+			Log.e("Register user", "Sending data for register complete");
 			Toast.makeText(getApplicationContext(), "Sending data complete", Toast.LENGTH_LONG).show();
 		}
 
