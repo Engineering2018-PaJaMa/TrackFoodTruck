@@ -2,15 +2,10 @@ package com.example.pajama.trackfoodtruck.Activities;
 
 import java.util.Objects;
 
-import com.example.pajama.trackfoodtruck.Data.FoodTruck;
 import com.example.pajama.trackfoodtruck.Fragments.FavouriteFragment;
 import com.example.pajama.trackfoodtruck.Fragments.HomeFragment;
 import com.example.pajama.trackfoodtruck.Fragments.MapFragment;
 import com.example.pajama.trackfoodtruck.R;
-import com.example.pajama.trackfoodtruck.httpTruckController.HttpTruckInterface;
-import com.example.pajama.trackfoodtruck.httpUserController.HttpUserInterface;
-import com.example.pajama.trackfoodtruck.httpUserController.HttpGetUser;
-import com.example.pajama.trackfoodtruck.Data.User;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,9 +18,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.TextView;
 
-public class WelcomeActivity extends AppCompatActivity implements HttpUserInterface, HttpTruckInterface
+public class WelcomeActivity extends AppCompatActivity
 {
 
 	@Override
@@ -41,7 +35,6 @@ public class WelcomeActivity extends AppCompatActivity implements HttpUserInterf
 		bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 		loadFragment(new HomeFragment());
-        new HttpGetUser().execute();
 	}
 
 
@@ -104,21 +97,4 @@ public class WelcomeActivity extends AppCompatActivity implements HttpUserInterf
 		transaction.commit();
 	}
 
-    @Override
-    public void httpGetUser(User user) {
-        TextView testUser = (TextView) findViewById(R.id.example_user);
-
-    }
-
-    @Override
-    public void httpPutUser(String info) {
-
-        TextView putOk = (TextView) findViewById(R.id.put_ok);
-        putOk.setText(info);
-    }
-
-    @Override
-    public void getTruck(FoodTruck truck) {
-
-    }
 }

@@ -1,14 +1,14 @@
 package com.example.pajama.trackfoodtruck.httpUserController;
 
-import android.os.AsyncTask;
-
-import com.example.pajama.trackfoodtruck.Data.User;
-
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.pajama.trackfoodtruck.Data.User;
+
+import android.os.AsyncTask;
+import android.util.Log;
+
 public class HttpGetUser extends AsyncTask<Void, Void, User> {
-    private HttpUserInterface httpUserInterface;
 
     @Override
     protected void onPreExecute() {
@@ -25,7 +25,7 @@ public class HttpGetUser extends AsyncTask<Void, Void, User> {
 
     @Override
     protected void onPostExecute(User user) {
-        httpUserInterface.httpGetUser(user);
+        Log.e("User get log:", user.toString());
         super.onPostExecute(user);
     }
 }
