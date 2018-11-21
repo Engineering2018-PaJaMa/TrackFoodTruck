@@ -1,15 +1,14 @@
 package com.example.pajama.trackfoodtruck.httpReviewsController;
 
-import android.os.AsyncTask;
-
-import com.example.pajama.trackfoodtruck.Data.Review;
-import com.example.pajama.trackfoodtruck.Data.User;
-
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.pajama.trackfoodtruck.Data.Review;
+
+import android.os.AsyncTask;
+
 public class HttpGetReviews extends AsyncTask<Void, Void, Review> {
-    private HttpReviewsIntreface httpReviewsIntreface;
+	private HttpReviewsIntrface httpReviewsIntreface;
 
     @Override
     protected void onPreExecute() {

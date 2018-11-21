@@ -1,13 +1,5 @@
 package com.example.pajama.trackfoodtruck.httpUserController;
 
-import android.os.AsyncTask;
-import android.util.Log;
-
-import com.example.pajama.trackfoodtruck.Data.User;
-import com.fasterxml.jackson.databind.SerializationFeature;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -16,6 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+
+import com.example.pajama.trackfoodtruck.Data.User;
+
+import android.os.AsyncTask;
+import android.util.Log;
 
 
 public class HttpPutUser extends AsyncTask<String, Void, Void> {
@@ -49,7 +46,7 @@ public class HttpPutUser extends AsyncTask<String, Void, Void> {
         String result = responseEntity.getBody();
         Log.e("User send log: ", result);
 
-        return null;
+		return null;
     }
 
     @Override

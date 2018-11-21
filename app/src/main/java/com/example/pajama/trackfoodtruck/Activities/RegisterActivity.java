@@ -30,7 +30,8 @@ public class RegisterActivity extends AppCompatActivity
 
 	public void registerUser(View view)
 	{
-        new HttpPutUser().execute(
+
+		new HttpPutUser().execute(
                 name.getText().toString(),
                 email.getText().toString(),
                 password.getText().toString(),
