@@ -2,14 +2,17 @@ package com.example.pajama.trackfoodtruck.Activities;
 
 import java.util.Objects;
 
+import com.example.pajama.trackfoodtruck.Data.FoodTruck;
 import com.example.pajama.trackfoodtruck.Fragments.FavouriteFragment;
 import com.example.pajama.trackfoodtruck.Fragments.HomeFragment;
 import com.example.pajama.trackfoodtruck.Fragments.MapFragment;
 import com.example.pajama.trackfoodtruck.R;
-import com.example.pajama.trackfoodtruck.api.HttpHandler;
+import com.example.pajama.trackfoodtruck.httpTruckController.HttpTruckInterface;
+import com.example.pajama.trackfoodtruck.httpUserController.HttpUserInterface;
+import com.example.pajama.trackfoodtruck.httpUserController.HttpGetUser;
+import com.example.pajama.trackfoodtruck.Data.User;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -20,9 +23,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.widget.TextView;
 
-public class WelcomeActivity extends AppCompatActivity
+public class WelcomeActivity extends AppCompatActivity implements HttpUserInterface, HttpTruckInterface
 {
 
 	@Override
@@ -38,37 +41,10 @@ public class WelcomeActivity extends AppCompatActivity
 		bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 		loadFragment(new HomeFragment());
-		new User().execute();
+        new HttpGetUser().execute();
 	}
 
-	private class User extends AsyncTask<Void, Void, Void>
-	{
 
-		String jsonStr;
-
-		@Override
-		protected void onPreExecute()
-		{
-			super.onPreExecute();
-			Toast.makeText(WelcomeActivity.this, "Json Data is downloading", Toast.LENGTH_LONG).show();
-		}
-
-		@Override
-		protected Void doInBackground(Void... arg0)
-		{
-			final HttpHandler httpHandler = new HttpHandler();
-			//            final String url = "http://127.0.0.1:8080/tft/user/1";    //Testing on device
-			final String url = "http://10.0.2.2:8080/tft/user/1";       //Testing on emulator since emulator has its own localhost we need to redirect it to our backend localhost.
-			jsonStr = httpHandler.makeServiceCall(url);
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void result)
-		{
-			super.onPostExecute(result);
-		}
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
@@ -128,4 +104,21 @@ public class WelcomeActivity extends AppCompatActivity
 		transaction.commit();
 	}
 
+    @Override
+    public void httpGetUser(User user) {
+        TextView testUser = (TextView) findViewById(R.id.example_user);
+
+    }
+
+    @Override
+    public void httpPutUser(String info) {
+
+        TextView putOk = (TextView) findViewById(R.id.put_ok);
+        putOk.setText(info);
+    }
+
+    @Override
+    public void getTruck(FoodTruck truck) {
+
+    }
 }
