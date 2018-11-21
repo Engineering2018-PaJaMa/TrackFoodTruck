@@ -1,5 +1,7 @@
 package com.example.pajama.trackfoodtruck.httpTruckController;
 
+import java.util.List;
+
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
@@ -8,7 +10,7 @@ import com.example.pajama.trackfoodtruck.Data.FoodTruck;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class HttpGetTruck extends AsyncTask<Void, Void, FoodTruck>
+public class HttpGetAllTruck extends AsyncTask<Void, Void, List<FoodTruck>>
 {
 
 	@Override
@@ -18,18 +20,18 @@ public class HttpGetTruck extends AsyncTask<Void, Void, FoodTruck>
 	}
 
 	@Override
-	protected FoodTruck doInBackground(Void... arg)
+	protected List<FoodTruck> doInBackground(Void... arg)
 	{
-		final String url = "http://192.168.1.110:8080/tft/foodtruck"; // the  url from where to fetch data(json) ip kompa
+		final String url = "http://192.168.1.110:8080/tft/foodtruck/all"; // the  url from where to fetch data(json)
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-		return restTemplate.getForObject(url, FoodTruck.class);
+		return restTemplate.getForObject(url, List.class);
 	}
 
 	@Override
-	protected void onPostExecute(FoodTruck foodTruck)
+	protected void onPostExecute(List foodTrucks)
 	{
-		Log.e("Truck get log:", foodTruck.toString());
-		super.onPostExecute(foodTruck);
+		Log.e("AllFoodTrucks get log:", foodTrucks.toString());
+		super.onPostExecute(foodTrucks);
 	}
 }

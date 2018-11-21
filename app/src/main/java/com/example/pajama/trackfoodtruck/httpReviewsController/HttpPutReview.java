@@ -32,7 +32,7 @@ public class HttpPutReview extends AsyncTask<String, Void, Boolean>
         newReview.setHeadline(arg[1]);
         newReview.setBody(arg[2]);
         newReview.setRating(Double.parseDouble(arg[3]));
-        newReview.setAuthorName(arg[4]);
+		newReview.setAuthor(arg[4]);
 
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.setContentType(new MediaType("application", "json"));

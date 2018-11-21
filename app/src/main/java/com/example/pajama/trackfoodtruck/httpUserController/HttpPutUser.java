@@ -29,11 +29,10 @@ public class HttpPutUser extends AsyncTask<String, Void, Boolean>
         RestTemplate restTemplate = new RestTemplate(true);
 
         User newUser = new User();
-        newUser.setLogin(arg[0]);
-        newUser.setEmail(arg[1]);
-        newUser.setPassword(arg[2]);
-        newUser.setRepPassword(arg[3]);
-       
+		newUser.setLogin(arg[0]); //login
+		newUser.setEmail(arg[1]); //email
+		newUser.setPassword(arg[2]); //password
+
 
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.setContentType(new MediaType("application", "json"));
