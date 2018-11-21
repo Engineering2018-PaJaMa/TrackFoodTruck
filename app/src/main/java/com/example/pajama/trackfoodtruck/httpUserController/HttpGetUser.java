@@ -1,6 +1,7 @@
 package com.example.pajama.trackfoodtruck.httpUserController;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.pajama.trackfoodtruck.Data.User;
 
@@ -26,6 +27,7 @@ public class HttpGetUser extends AsyncTask<Void, Void, User> {
     @Override
     protected void onPostExecute(User user) {
         httpUserInterface.httpGetUser(user);
+        Log.e("User get log:", user.toString());
         super.onPostExecute(user);
     }
 }

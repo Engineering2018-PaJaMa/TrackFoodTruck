@@ -6,6 +6,6 @@ public interface HttpUserInterface {
 
     void httpGetUser(User user);
 
-    void httpPutUser(String info);
+    void httpPutUser(String backInfo);
 
 }

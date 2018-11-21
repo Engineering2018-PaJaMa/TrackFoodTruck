@@ -1,6 +1,7 @@
 package com.example.pajama.trackfoodtruck.httpTruckController;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.pajama.trackfoodtruck.Data.FoodTruck;
 
@@ -26,6 +27,7 @@ public class HttpGetTruck extends AsyncTask<Void, Void, FoodTruck> {
     @Override
     protected void onPostExecute(FoodTruck foodTruck) {
         httpTruckInterface.getTruck(foodTruck);
+        Log.e("FoodTruck get log:", foodTruck.toString());
         super.onPostExecute(foodTruck);
     }
 }
