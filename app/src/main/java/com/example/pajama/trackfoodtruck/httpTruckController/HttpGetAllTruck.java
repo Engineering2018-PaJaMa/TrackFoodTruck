@@ -22,7 +22,7 @@ public class HttpGetAllTruck extends AsyncTask<Void, Void, List<FoodTruck>>
 	@Override
 	protected List<FoodTruck> doInBackground(Void... arg)
 	{
-		final String url = "http://192.168.1.110:8080/tft/foodtruck/all"; // the  url from where to fetch data(json)
+		final String url = "http://212.191.92.88:51110/tft/foodtruck/all"; // the  url from where to fetch data(json)
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 		return restTemplate.getForObject(url, List.class);

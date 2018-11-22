@@ -20,7 +20,7 @@ public class HttpGetReviews extends AsyncTask<Void, Void, List<Review>>
     @Override
 	protected List doInBackground(Void... arg)
 	{
-		final String url = "http://192.168.1.110:8080/tft/review"; // the  url from where to fetch data(json) ip kompa
+		final String url = "http://212.191.92.88:51110/tft/review"; // the  url from where to fetch data(json) ip kompa
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 		return restTemplate.getForObject(url, List.class);
