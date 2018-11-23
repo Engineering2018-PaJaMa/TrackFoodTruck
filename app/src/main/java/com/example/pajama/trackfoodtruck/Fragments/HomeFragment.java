@@ -1,59 +1,63 @@
 package com.example.pajama.trackfoodtruck.Fragments;
 
+import com.example.pajama.trackfoodtruck.Activities.DetailsActivity;
+import com.example.pajama.trackfoodtruck.ListAdapter.FavouriteFoodTruckListAdapter;
+import com.example.pajama.trackfoodtruck.ListAdapter.FoodTruckListAdapter;
 import com.example.pajama.trackfoodtruck.R;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 public class HomeFragment extends Fragment
 {
-	// TODO: Rename parameter arguments, choose names that match
-	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-	private static final String ARG_PARAM1 = "param1";
-	private static final String ARG_PARAM2 = "param2";
+	String[] nameArray = { "FoodTruck1", "FoodTruck2", "FoodTruck3", "FoodTruck4" };
 
-	// TODO: Rename and change types of parameters
-	private String mParam1;
-	private String mParam2;
+	String[] infoArray = { "cuisine type1", "cuisine type2", "cuisine type3", "cuisine type4" };
 
-	//private OnFragmentInteractionListener mListener;
+	Integer[] imageArray = { R.drawable.foodtrucksample,R.drawable.foodtrucksample,R.drawable.foodtrucksample,R.drawable.foodtrucksample, };
 
-	public HomeFragment()
-	{
-		// Required empty public constructor
-	}
-
-	public static HomeFragment newInstance(String param1, String param2)
-	{
-		HomeFragment fragment = new HomeFragment();
-		Bundle args = new Bundle();
-		args.putString(ARG_PARAM1, param1);
-		args.putString(ARG_PARAM2, param2);
-		fragment.setArguments(args);
-		return fragment;
-	}
+	ListView listView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		if (getArguments() != null)
-		{
-			mParam1 = getArguments().getString(ARG_PARAM1);
-			mParam2 = getArguments().getString(ARG_PARAM2);
-		}
+
 	}
 
 	@Override
-	public View onCreateView(
-			LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
-		return inflater.inflate(R.layout.fragment_home, container, false);
+		View view = inflater.inflate(R.layout.fragment_home, container, false);
+		FoodTruckListAdapter foodTruckListAdapter = new FoodTruckListAdapter(getActivity(), nameArray, infoArray, imageArray);
+
+		listView = view.findViewById(R.id.welcomeListView);
+		listView.setAdapter(foodTruckListAdapter);
+
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					int position, long arg3) {
+				// TODO Auto-generated method stub
+
+
+				Intent intent = new Intent(getActivity(), DetailsActivity.class);
+				startActivity(intent);
+
+
+			}
+		});
+
+		return view;
 	}
+
 }
