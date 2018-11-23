@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 
 public class DetailsActivity extends AppCompatActivity
@@ -43,6 +44,15 @@ public class DetailsActivity extends AppCompatActivity
 		Toolbar myToolbar = findViewById(R.id.ActivityToolbar);
 		setSupportActionBar(myToolbar);
 		Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+
+		myToolbar.setNavigationIcon(R.drawable.ic_backbutton);
+
+		myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(getApplicationContext(),WelcomeActivity.class));
+			}
+		});
 
 		ReviewListAdapter reviewListAdapter = new ReviewListAdapter(this, dateArray, authorArray, reviewArray);
 		listView = (ListView) findViewById(R.id.reviewsList);
