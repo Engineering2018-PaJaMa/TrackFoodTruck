@@ -1,12 +1,11 @@
 package com.example.pajama.trackfoodtruck.Data;
 
-import android.location.Location;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class FoodTruck{
 
+	private Map<String, Object> _id;
     private String name;
     private String cuisine;
     private String description;
@@ -71,5 +70,15 @@ public class FoodTruck{
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
+
+	public Map<String, Object> get_id()
+	{
+		return _id;
+	}
+
+	public void set_id(Map<String, Object> _id)
+	{
+		this._id = _id;
+	}
 
 }

@@ -24,7 +24,6 @@
 				android:id="@+id/foodTruckNameTextView"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:text="FoodTruckName"
 				android:textSize="24sp"
 				android:textStyle="bold"/>
 
@@ -32,17 +31,15 @@
 				android:id="@+id/foodTruckInfoTextView"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:text="CuisinesName"
 				android:textSize="18sp"/>
 		<LinearLayout
 				android:orientation="horizontal"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content">
 			<TextView
-					android:text="Open"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:id="@+id/openCloseTextView" android:layout_weight="50"/>
+					android:id="@+id/cuisineTextView" android:layout_weight="50"/>
 			<RatingBar
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"

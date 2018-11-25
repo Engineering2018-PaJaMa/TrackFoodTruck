@@ -26,6 +26,7 @@ public class DetailsActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_details);
+
 		HttpGetReviews reviewsProcess = new HttpGetReviews();
 		reviewsProcess.execute();
 

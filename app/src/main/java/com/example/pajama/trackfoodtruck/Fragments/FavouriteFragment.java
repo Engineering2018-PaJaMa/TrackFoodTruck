@@ -10,6 +10,7 @@ import com.example.pajama.trackfoodtruck.httpTruckController.HttpGetAllTruck;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,12 @@ public class FavouriteFragment extends Fragment
 
 	ArrayList<String> infoArray = new ArrayList<>();
 
-	ArrayList<Integer> imageArray = new ArrayList<>();
+	ArrayList<String> imageArray = new ArrayList<>();
+
+	ArrayList<String> cuisineArray = new ArrayList<>();
+
+	ArrayList<Double> raitingArray = new ArrayList<>();
+
 	ListView listView;
 
 	@Override
@@ -39,22 +45,32 @@ public class FavouriteFragment extends Fragment
 		HttpGetAllTruck truckProcess = new HttpGetAllTruck();
 		truckProcess.execute();
 
+
 		try
 		{
-//			for (FoodTruck foodTruck : truckProcess.get().)
-//			{
+			for (FoodTruck foodTruck : truckProcess.get())
+			{
 
-				nameArray.add(truckProcess.get().get(0).getName());
-				infoArray.add(truckProcess.get().get(0).getDescription());
-				imageArray.add(Integer.parseInt(truckProcess.get().get(0).getPhoto()));
-//			}
+				nameArray.add(foodTruck.getName());
+				infoArray.add(foodTruck.getDescription());
+				imageArray.add(foodTruck.getPhoto());
+				cuisineArray.add(foodTruck.getCuisine());
+				raitingArray.add(foodTruck.getRating());
+			}
 		}
 		catch (ExecutionException | InterruptedException e)
 		{
 			e.printStackTrace();
 		}
+		Log.e("qq", nameArray.get(0));
 
-		FavouriteFoodTruckListAdapter favouriteFoodTruckListAdapter = new FavouriteFoodTruckListAdapter(getActivity(), nameArray, infoArray, imageArray);
+		FavouriteFoodTruckListAdapter favouriteFoodTruckListAdapter = new FavouriteFoodTruckListAdapter(
+				getActivity(),
+				nameArray,
+				infoArray,
+				imageArray,
+				cuisineArray,
+				raitingArray);
 
 		listView = view.findViewById(R.id.favouriteListView);
 		listView.setAdapter(favouriteFoodTruckListAdapter);

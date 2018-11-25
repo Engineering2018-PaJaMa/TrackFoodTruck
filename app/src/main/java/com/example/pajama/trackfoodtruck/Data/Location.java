@@ -11,7 +11,8 @@ public class Location {
     private Integer longitude;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public String getCountry() {
+	public String getCountry()
+	{
         return country;
     }
 
