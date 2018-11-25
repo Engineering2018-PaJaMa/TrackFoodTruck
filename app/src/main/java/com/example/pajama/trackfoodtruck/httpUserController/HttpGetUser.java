@@ -5,14 +5,20 @@ import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.FormHttpMessageConverter;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.pajama.trackfoodtruck.Data.User;
 
 import android.os.AsyncTask;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HttpGetUser extends AsyncTask<String, Void, User>
 {
@@ -31,7 +37,7 @@ public class HttpGetUser extends AsyncTask<String, Void, User>
 		JSONObject newUser = null;
 		try
 		{
-			newUser = new JSONObject().put("login", "").put("password", arg[1]).put("email", arg[0]);
+			newUser = new JSONObject().put("password", arg[1]).put("email", arg[0]);
 		}
 		catch (JSONException e)
 		{
@@ -40,10 +46,16 @@ public class HttpGetUser extends AsyncTask<String, Void, User>
 
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.setContentType(new MediaType("application", "json"));
-		HttpEntity<String> requestEntity = new HttpEntity<>(newUser.toString(), requestHeaders);
+		HttpEntity<String> requestEntity = new HttpEntity<>(newUser.toString(),requestHeaders);
+		Log.e("qqq",newUser.toString());
 
-		restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-		restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
+		messageConverters.add(new FormHttpMessageConverter());
+		messageConverters.add(new StringHttpMessageConverter());
+		messageConverters.add(new MappingJackson2HttpMessageConverter());
+
+		//restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+		restTemplate.setMessageConverters(messageConverters);
 
 		return restTemplate.postForObject(url,requestEntity, User.class);
     }

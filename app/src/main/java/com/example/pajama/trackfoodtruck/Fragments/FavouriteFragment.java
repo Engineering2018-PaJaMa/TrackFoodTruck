@@ -41,18 +41,15 @@ public class FavouriteFragment extends Fragment
 
 		try
 		{
-			for (FoodTruck foodTruck : truckProcess.get())
-			{
-				nameArray.add(foodTruck.getName());
-				infoArray.add(foodTruck.getDescription());
-				imageArray.add(Integer.parseInt(foodTruck.getPhoto()));
-			}
+//			for (FoodTruck foodTruck : truckProcess.get().)
+//			{
+
+				nameArray.add(truckProcess.get().get(0).getName());
+				infoArray.add(truckProcess.get().get(0).getDescription());
+				imageArray.add(Integer.parseInt(truckProcess.get().get(0).getPhoto()));
+//			}
 		}
-		catch (ExecutionException e)
-		{
-			e.printStackTrace();
-		}
-		catch (InterruptedException e)
+		catch (ExecutionException | InterruptedException e)
 		{
 			e.printStackTrace();
 		}
