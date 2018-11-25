@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity
 {
@@ -39,7 +40,8 @@ public class LoginActivity extends AppCompatActivity
 		Log.i("Email: ", email);
 		Log.i(" Password: ", password);
 		HttpGetUser userProcess = new HttpGetUser();
-		userProcess.execute();
+		userProcess.execute(email, password);
+
 		if (userProcess.get().getEmail().equals(email) && userProcess.get().getPassword().equals(password))
 		{
 			Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
@@ -50,8 +52,6 @@ public class LoginActivity extends AppCompatActivity
 			Log.e("Fail login", "Wrong data");
 			Toast.makeText(getApplicationContext(), "There is no such user", Toast.LENGTH_LONG).show();
 		}
-    Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
-		startActivity(intent);
 	}
 
 	public void goToRegisterActivity(View view)
