@@ -19,7 +19,7 @@ import com.example.pajama.trackfoodtruck.Data.Review;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class HttpGetReviews extends AsyncTask<Void, Void, List<Review>>
+public class HttpGetReviews extends AsyncTask<String, Void, List<Review>>
 {
 
     @Override
@@ -28,7 +28,7 @@ public class HttpGetReviews extends AsyncTask<Void, Void, List<Review>>
     }
 
     @Override
-	protected List doInBackground(Void... arg)
+	protected List doInBackground(String... arg)
 	{
 		final String url = "http://212.191.92.88:51110/tft/review"; // the  url from where to fetch data(json) ip kompa
         RestTemplate restTemplate = new RestTemplate();
