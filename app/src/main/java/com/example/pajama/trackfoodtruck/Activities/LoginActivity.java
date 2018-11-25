@@ -38,18 +38,20 @@ public class LoginActivity extends AppCompatActivity
 		String password = passwordForm.getText().toString();
 		Log.i("Email: ", email);
 		Log.i(" Password: ", password);
-
 		HttpGetUser userProcess = new HttpGetUser();
-		userProcess.execute(email, password);
-
-		Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
+		userProcess.execute();
+		if (userProcess.get().getEmail().equals(email) && userProcess.get().getPassword().equals(password))
+		{
+			Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
+			startActivity(intent);
+		}
+		else
+		{
+			Log.e("Fail login", "Wrong data");
+			Toast.makeText(getApplicationContext(), "There is no such user", Toast.LENGTH_LONG).show();
+		}
+    Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
 		startActivity(intent);
-
-		//		else
-		//		{
-		//			Log.e("Fail login", "Wrong data");
-		//			Toast.makeText(getApplicationContext(), "There is no such user", Toast.LENGTH_LONG).show();
-		//		}
 	}
 
 	public void goToRegisterActivity(View view)
