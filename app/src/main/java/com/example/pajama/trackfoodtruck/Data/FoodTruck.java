@@ -1,53 +1,84 @@
 package com.example.pajama.trackfoodtruck.Data;
 
-import android.location.Location;
+import java.util.HashMap;
+import java.util.Map;
 
-public class FoodTruck {
-    private String id;
+public class FoodTruck{
 
+	private Map<String, Object> _id;
     private String name;
-
-    private String owner;
-    private String typeOfFood;
+    private String cuisine;
     private String description;
     private Location location;
-    private String photo;
     private Double rating;
-    private String reviews;
+    private String photo;
 
-    public String getId() {
-        return id;
-    }
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String getName() {
         return name;
     }
 
-    public String getOwner() {
-        return owner;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTypeOfFood() {
-        return typeOfFood;
+    public String getCuisine() {
+        return cuisine;
+    }
+
+    public void setCuisine(String cuisine) {
+        this.cuisine = cuisine;
     }
 
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Location getLocation() {
         return location;
     }
 
-    public String getPhoto() {
-        return photo;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public Double getRating() {
         return rating;
     }
 
-    public String getReviews() {
-        return reviews;
+    public void setRating(Double rating) {
+        this.rating = rating;
     }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+	public Map<String, Object> get_id()
+	{
+		return _id;
+	}
+
+	public void set_id(Map<String, Object> _id)
+	{
+		this._id = _id;
+	}
+
 }

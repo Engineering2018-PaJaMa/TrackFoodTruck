@@ -18,6 +18,7 @@ public class LoginActivity extends AppCompatActivity
 
 	TextView emailForm;
 	TextView passwordForm;
+	public static String currentLogInUser;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -35,24 +36,24 @@ public class LoginActivity extends AppCompatActivity
 
 	public void goTologinActivity(View view) throws ExecutionException, InterruptedException
 	{
-		Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
-		startActivity(intent);
-//		String email = emailForm.getText().toString();
-//		String password = passwordForm.getText().toString();
-//		Log.i("Email: ", email);
-//		Log.i(" Password: ", password);
-//		HttpGetUser userProcess = new HttpGetUser();
-//		userProcess.execute();
-//		if (userProcess.get().getEmail().equals(email) && userProcess.get().getPassword().equals(password))
-//		{
-//			Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
-//			startActivity(intent);
-//		}
-//		else
-//		{
-//			Log.e("Fail login", "Wrong data");
-//			Toast.makeText(getApplicationContext(), "There is no such user", Toast.LENGTH_LONG).show();
-//		}
+		String email = emailForm.getText().toString();
+		String password = passwordForm.getText().toString();
+		Log.i("Email: ", email);
+		Log.i(" Password: ", password);
+		HttpGetUser userProcess = new HttpGetUser();
+		userProcess.execute(email, password);
+
+		if (userProcess.get().getEmail().equals(email) && userProcess.get().getPassword().equals(password))
+		{
+			currentLogInUser = email;
+			Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
+			startActivity(intent);
+		}
+		else
+		{
+			Log.e("Fail login", "Wrong data");
+			Toast.makeText(getApplicationContext(), "There is no such user", Toast.LENGTH_LONG).show();
+		}
 	}
 
 	public void goToRegisterActivity(View view)

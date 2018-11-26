@@ -1,41 +1,74 @@
 package com.example.pajama.trackfoodtruck.Data;
 
-public class Review {
+import java.util.Map;
 
-    private String headline;
-    private String body;
-    private Double rating;
-    private String authorName;
+public class Review
+{
 
-    public String getHeadline() {
-        return headline;
-    }
+	private Map<String, Object> _id;
+	private String restaurantName;
+	private String headline;
+	private String body;
+	private Double rating;
+	private String author;
 
-    public void setHeadline(String headline) {
-        this.headline = headline;
-    }
+	public String getRestaurantName()
+	{
+		return restaurantName;
+	}
 
-    public String getBody() {
-        return body;
-    }
+	public void setRestaurantName(String restaurantName)
+	{
+		this.restaurantName = restaurantName;
+	}
 
-    public void setBody(String body) {
-        this.body = body;
-    }
+	public String getAuthor()
+	{
+		return author;
+	}
 
-    public Double getRating() {
-        return rating;
-    }
+	public void setAuthor(String author)
+	{
+		this.author = author;
+	}
 
-    public void setRating(Double rating) {
-        this.rating = rating;
-    }
+	public String getHeadline()
+	{
+		return headline;
+	}
 
-    public String getAuthorName() {
-        return authorName;
-    }
+	public void setHeadline(String headline)
+	{
+		this.headline = headline;
+	}
 
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
-    }
+	public String getBody()
+	{
+		return body;
+	}
+
+	public void setBody(String body)
+	{
+		this.body = body;
+	}
+
+	public Double getRating()
+	{
+		return rating;
+	}
+
+	public void setRating(Double rating)
+	{
+		this.rating = rating;
+	}
+
+	public Map<String, Object> get_id()
+	{
+		return _id;
+	}
+
+	public void set_id(Map<String, Object> _id)
+	{
+		this._id = _id;
+	}
 }

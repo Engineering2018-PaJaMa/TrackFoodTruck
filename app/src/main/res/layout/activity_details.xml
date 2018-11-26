@@ -14,16 +14,13 @@
 			android:id="@+id/foodTruckDetailImage" tools:layout_editor_absoluteX="8dp" android:scaleType="fitStart" android:cropToPadding="true"
 			android:adjustViewBounds="true"/>
 	<TextView
-			android:text="FoodTrackName"
 			android:layout_width="match_parent"
 			android:textSize="20dp"
 			android:layout_height="wrap_content" android:id="@+id/foodTruckNametextView" android:padding="5dp"/>
 	<TextView
-			android:text="Polska kuchnia"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content" android:id="@+id/foodTruckFoodTypetextView" android:padding="5dp"/>
 	<TextView
-			android:text="Super pyszne jedzenie, najlepsze, wow"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content" android:id="@+id/foodTruckDescriptiontextView" android:padding="5dp"/>
 	<LinearLayout
@@ -40,7 +37,6 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content" android:id="@+id/foodTruckDetailsratingBar"
 				android:numStars="5"
-				android:rating="3"
 				android:layout_gravity="right"
 				style="@style/Widget.AppCompat.RatingBar.Indicator" android:layout_weight="1"/>
 		<Button

@@ -25,15 +25,14 @@ public class HttpPutUser extends AsyncTask<String, Void, Boolean>
     @Override
 	protected Boolean doInBackground(String... arg)
 	{
-        final String url = "http://192.168.1.110:8080/tft/user"; // the  url from where to fetch data(json)
+        final String url = "http://212.191.92.88:51110/tft/user"; // the  url from where to fetch data(json)
         RestTemplate restTemplate = new RestTemplate(true);
 
         User newUser = new User();
-        newUser.setLogin(arg[0]);
-        newUser.setEmail(arg[1]);
-        newUser.setPassword(arg[2]);
-        newUser.setRepPassword(arg[3]);
-       
+		newUser.setLogin(arg[0]); //login
+		newUser.setEmail(arg[1]); //email
+		newUser.setPassword(arg[2]); //password
+
 
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.setContentType(new MediaType("application", "json"));

@@ -1,14 +1,18 @@
 package com.example.pajama.trackfoodtruck.Fragments;
 
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
 import com.example.pajama.trackfoodtruck.Activities.DetailsActivity;
+import com.example.pajama.trackfoodtruck.Data.FoodTruck;
 import com.example.pajama.trackfoodtruck.ListAdapter.FavouriteFoodTruckListAdapter;
 import com.example.pajama.trackfoodtruck.R;
+import com.example.pajama.trackfoodtruck.httpTruckController.HttpGetAllTruck;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,49 +22,76 @@ import android.widget.ListView;
 public class FavouriteFragment extends Fragment
 {
 
-	String[] nameArray = { "FoodTruck1", "FoodTruck2", "FoodTruck3", "FoodTruck4" };
+	ArrayList<String> nameArray = new ArrayList<>();
 
-	String[] infoArray = { "cuisine type1", "cuisine type2", "cuisine type3", "cuisine type4" };
+	ArrayList<String> infoArray = new ArrayList<>();
 
-	Integer[] imageArray = { R.drawable.foodtrucksample,R.drawable.foodtrucksample,R.drawable.foodtrucksample,R.drawable.foodtrucksample, };
+	ArrayList<String> imageArray = new ArrayList<>();
+
+	ArrayList<String> cuisineArray = new ArrayList<>();
+
+	ArrayList<Double> raitingArray = new ArrayList<>();
 
 	ListView listView;
+
+	public static String choosenFoodTruck;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		View view = inflater.inflate(R.layout.fragment_favourite, container, false);
-		FavouriteFoodTruckListAdapter favouriteFoodTruckListAdapter = new FavouriteFoodTruckListAdapter(getActivity(), nameArray, infoArray, imageArray);
+
+		HttpGetAllTruck truckProcess = new HttpGetAllTruck();
+		truckProcess.execute();
+
+
+		try
+		{
+			for (FoodTruck foodTruck : truckProcess.get())
+			{
+
+				nameArray.add(foodTruck.getName());
+				infoArray.add(foodTruck.getDescription());
+				imageArray.add(foodTruck.getPhoto());
+				cuisineArray.add(foodTruck.getCuisine());
+				raitingArray.add(foodTruck.getRating());
+			}
+		}
+		catch (ExecutionException | InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+		Log.e("qq", nameArray.get(0));
+
+
+		FavouriteFoodTruckListAdapter favouriteFoodTruckListAdapter = new FavouriteFoodTruckListAdapter(
+				getActivity(),
+				nameArray,
+				infoArray,
+				imageArray,
+				cuisineArray,
+				raitingArray);
 
 		listView = view.findViewById(R.id.favouriteListView);
 		listView.setAdapter(favouriteFoodTruckListAdapter);
 
-		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+		{
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1,
-					int position, long arg3) {
-				// TODO Auto-generated method stub
-
-
+			public void onItemClick(
+					AdapterView<?> arg0, View arg1, int position, long arg3)
+			{
+				choosenFoodTruck = nameArray.get(position);
 				Intent intent = new Intent(getActivity(), DetailsActivity.class);
 				startActivity(intent);
-
-
 			}
 		});
-
 		return view;
 	}
-
-
-
-
 }
