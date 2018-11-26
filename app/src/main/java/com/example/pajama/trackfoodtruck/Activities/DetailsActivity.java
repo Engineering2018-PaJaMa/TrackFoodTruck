@@ -43,7 +43,7 @@ public class DetailsActivity extends AppCompatActivity
 		setContentView(R.layout.activity_details);
 
 		HttpGetReviews reviewsProcess = new HttpGetReviews();
-		reviewsProcess.execute("foodTruckName");
+		reviewsProcess.execute("Restaurant");
 
 		try
 		{
@@ -51,6 +51,7 @@ public class DetailsActivity extends AppCompatActivity
 			{
 				authorArray.add(review.getAuthor());
 				reviewArray.add(review.getBody());
+				Log.e("www", review.getBody());
 				dateArray.add(review.getRating().toString());
 			}
 		}
@@ -62,14 +63,13 @@ public class DetailsActivity extends AppCompatActivity
 		HttpGetTruck truckProcess = new HttpGetTruck();
 		truckProcess.execute("foodTruckName");
 
-		TextView nameTextField = findViewById(R.id.detailDateTextView);
+		TextView nameTextField = findViewById(R.id.foodTruckNametextView);
 		TextView cuisineTextField = findViewById(R.id.foodTruckFoodTypetextView);
 		TextView descriptionTextField = findViewById(R.id.foodTruckDescriptiontextView);
 		RatingBar ratingBar = findViewById(R.id.foodTruckDetailsratingBar);
 
 		try
 		{
-			Log.e("qqqqqqqqqqqq", truckProcess.get().getName());
 			nameTextField.setText(truckProcess.get().getName());
 			cuisineTextField.setText(truckProcess.get().getCuisine());
 			descriptionTextField.setText(truckProcess.get().getDescription());
@@ -102,7 +102,6 @@ public class DetailsActivity extends AppCompatActivity
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
                 addOpinion();
 			}
 		});

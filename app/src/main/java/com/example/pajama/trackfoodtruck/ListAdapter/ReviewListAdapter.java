@@ -35,7 +35,7 @@ public class ReviewListAdapter extends ArrayAdapter
 		LayoutInflater inflater = context.getLayoutInflater();
 		View rowView = inflater.inflate(R.layout.detailslistview_row, null, true);
 
-		TextView dateTextField = rowView.findViewById(R.id.foodTruckNametextView);
+		TextView dateTextField = rowView.findViewById(R.id.detailDateTextView);
 		TextView authorNameTextField = rowView.findViewById(R.id.detailsAuthorReviewextView);
 		TextView reviewTextField = rowView.findViewById(R.id.reviewTextView);
 

@@ -42,13 +42,12 @@ public class HttpGetTruck extends AsyncTask<String, Void, FoodTruck>
 		}
 		catch (JSONException e)
 		{
-			Log.e("Error", "Problem with getting user");
+			Log.e("Error", "Problem with getting foodtruck");
 		}
 
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.setContentType(new MediaType("application", "json"));
 		HttpEntity<String> requestEntity = new HttpEntity<>(newFoodTruck.toString(), requestHeaders);
-		Log.e("qqqq", newFoodTruck.toString());
 
 		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
 		messageConverters.add(new FormHttpMessageConverter());

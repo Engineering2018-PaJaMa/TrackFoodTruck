@@ -1,8 +1,11 @@
 package com.example.pajama.trackfoodtruck.Data;
 
+import java.util.Map;
+
 public class Review
 {
 
+	private Map<String, Object> _id;
 	private String restaurantName;
 	private String headline;
 	private String body;
@@ -57,5 +60,15 @@ public class Review
 	public void setRating(Double rating)
 	{
 		this.rating = rating;
+	}
+
+	public Map<String, Object> get_id()
+	{
+		return _id;
+	}
+
+	public void set_id(Map<String, Object> _id)
+	{
+		this._id = _id;
 	}
 }

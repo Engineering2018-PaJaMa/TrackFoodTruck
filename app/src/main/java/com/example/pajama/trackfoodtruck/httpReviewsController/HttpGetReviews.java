@@ -15,6 +15,8 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 
 import com.example.pajama.trackfoodtruck.Data.Review;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -32,6 +34,7 @@ public class HttpGetReviews extends AsyncTask<String, Void, List<Review>>
 	{
 		final String url = "http://212.191.92.88:51110/tft/review"; // the  url from where to fetch data(json) ip kompa
         RestTemplate restTemplate = new RestTemplate();
+		ObjectMapper mapper = new ObjectMapper();
 
 		JSONObject newRestaurant = null;
 		try
@@ -40,13 +43,12 @@ public class HttpGetReviews extends AsyncTask<String, Void, List<Review>>
 		}
 		catch (JSONException e)
 		{
-			Log.e("Error", "Problem with getting user");
+			Log.e("Error", "Problem with getting review");
 		}
 
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.setContentType(new MediaType("application", "json"));
 		HttpEntity<String> requestEntity = new HttpEntity<>(newRestaurant.toString(), requestHeaders);
-		Log.e("qqqqq", newRestaurant.toString());
 
 		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
 		messageConverters.add(new FormHttpMessageConverter());
@@ -54,7 +56,9 @@ public class HttpGetReviews extends AsyncTask<String, Void, List<Review>>
 		messageConverters.add(new MappingJackson2HttpMessageConverter());
 
 		restTemplate.setMessageConverters(messageConverters);
-		return restTemplate.postForObject(url, requestEntity, List.class);
+		return mapper.convertValue(restTemplate.postForObject(url, requestEntity, ArrayList.class), new TypeReference<List<Review>>()
+		{
+		});
     }
 
     @Override
