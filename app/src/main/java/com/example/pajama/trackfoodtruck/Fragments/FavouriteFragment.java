@@ -34,6 +34,8 @@ public class FavouriteFragment extends Fragment
 
 	ListView listView;
 
+	public static String choosenFoodTruck;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -85,7 +87,7 @@ public class FavouriteFragment extends Fragment
 			public void onItemClick(
 					AdapterView<?> arg0, View arg1, int position, long arg3)
 			{
-				// TODO Auto-generated method stub
+				choosenFoodTruck = nameArray.get(position);
 				Intent intent = new Intent(getActivity(), DetailsActivity.class);
 				startActivity(intent);
 			}

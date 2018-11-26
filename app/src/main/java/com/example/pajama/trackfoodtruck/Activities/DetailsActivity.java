@@ -5,11 +5,14 @@ import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 import com.example.pajama.trackfoodtruck.Data.Review;
+import com.example.pajama.trackfoodtruck.Fragments.FavouriteFragment;
 import com.example.pajama.trackfoodtruck.ListAdapter.ReviewListAdapter;
 import com.example.pajama.trackfoodtruck.R;
 import com.example.pajama.trackfoodtruck.httpReviewsController.HttpGetReviews;
+import com.example.pajama.trackfoodtruck.httpReviewsController.HttpPutReview;
 import com.example.pajama.trackfoodtruck.httpTruckController.HttpGetTruck;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,10 +25,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class DetailsActivity extends AppCompatActivity
@@ -43,7 +49,7 @@ public class DetailsActivity extends AppCompatActivity
 		setContentView(R.layout.activity_details);
 
 		HttpGetReviews reviewsProcess = new HttpGetReviews();
-		reviewsProcess.execute("Restaurant");
+		reviewsProcess.execute(FavouriteFragment.choosenFoodTruck);
 
 		try
 		{
@@ -61,7 +67,7 @@ public class DetailsActivity extends AppCompatActivity
 		}
 
 		HttpGetTruck truckProcess = new HttpGetTruck();
-		truckProcess.execute("foodTruckName");
+		truckProcess.execute(FavouriteFragment.choosenFoodTruck);
 
 		TextView nameTextField = findViewById(R.id.foodTruckNametextView);
 		TextView cuisineTextField = findViewById(R.id.foodTruckFoodTypetextView);
@@ -135,20 +141,52 @@ public class DetailsActivity extends AppCompatActivity
 
 	public void addOpinion() {
 
+		Context context = this.getBaseContext();
+		LinearLayout layout = new LinearLayout(context);
+		layout.setOrientation(LinearLayout.VERTICAL);
+
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Add Opinion");
 
-		// Set up the input
-		final EditText input = new EditText(this);
-		// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-		input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_TEXT);
-		builder.setView(input);
+		final EditText inputHeadline = new EditText(this);
+		final EditText inputBody = new EditText(this);
+		final Spinner raitingSpiner = new Spinner(this);
+
+		ArrayList<Integer> raitingOptions = new ArrayList<>();
+		raitingOptions.add(1);
+		raitingOptions.add(2);
+		raitingOptions.add(3);
+		raitingOptions.add(4);
+		raitingOptions.add(5);
+
+		ArrayAdapter spinnerAdapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, raitingOptions);
+		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+		raitingSpiner.setAdapter(spinnerAdapter);
+
+		inputHeadline.setHint("Headline");
+		inputBody.setHint("Review");
+
+		inputHeadline.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_TEXT);
+		inputBody.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_TEXT);
+
+		layout.addView(inputHeadline);
+		layout.addView(inputBody);
+		layout.addView(raitingSpiner);
+
+		builder.setView(layout);
+
+		final HttpPutReview putReviewProcess = new HttpPutReview();
+
 
 		// Set up the buttons
 		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				String m_Text = input.getText().toString();
+				String headlineText = inputHeadline.getText().toString();
+				String bodyText = inputBody.getText().toString();
+				String raiting = raitingSpiner.getSelectedItem().toString();
+				putReviewProcess.execute(FavouriteFragment.choosenFoodTruck, headlineText, bodyText, raiting, LoginActivity.currentLogInUser);
 			}
 		});
 		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

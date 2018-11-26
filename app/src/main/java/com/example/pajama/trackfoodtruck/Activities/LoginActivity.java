@@ -18,6 +18,7 @@ public class LoginActivity extends AppCompatActivity
 
 	TextView emailForm;
 	TextView passwordForm;
+	public static String currentLogInUser;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -44,6 +45,7 @@ public class LoginActivity extends AppCompatActivity
 
 		if (userProcess.get().getEmail().equals(email) && userProcess.get().getPassword().equals(password))
 		{
+			currentLogInUser = email;
 			Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
 			startActivity(intent);
 		}

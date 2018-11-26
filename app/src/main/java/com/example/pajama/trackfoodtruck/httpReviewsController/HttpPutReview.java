@@ -29,6 +29,7 @@ public class HttpPutReview extends AsyncTask<String, Void, Boolean>
         RestTemplate restTemplate = new RestTemplate(true);
 
         Review newReview = new Review();
+		newReview.setRestaurantName(arg[0]);
         newReview.setHeadline(arg[1]);
         newReview.setBody(arg[2]);
         newReview.setRating(Double.parseDouble(arg[3]));
