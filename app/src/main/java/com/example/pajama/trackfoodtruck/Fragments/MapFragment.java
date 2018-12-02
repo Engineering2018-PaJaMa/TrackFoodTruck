@@ -1,9 +1,15 @@
 package com.example.pajama.trackfoodtruck.Fragments;
 
+import java.util.concurrent.ExecutionException;
+
+import com.example.pajama.trackfoodtruck.Data.FoodTruck;
 import com.example.pajama.trackfoodtruck.R;
+import com.example.pajama.trackfoodtruck.httpTruckController.HttpGetAllTruck;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -42,10 +48,25 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
 	public void onMapReady(GoogleMap googleMap)
 	{
 		mMap = googleMap;
-
-		mMap.setOnMyLocationButtonClickListener(this);
-		mMap.setOnMyLocationClickListener(this);
 		enableMyLocation();
+		updateLocationUI();
+
+		HttpGetAllTruck allTrucksTask = new HttpGetAllTruck();
+		allTrucksTask.execute();
+
+		try
+		{
+			for (FoodTruck foodTruck : allTrucksTask.get())
+			{
+				LatLng foodTracLoc = new LatLng(foodTruck.getLocation().getLatitude(), foodTruck.getLocation().getLatitude());
+				mMap.addMarker(new MarkerOptions().position(foodTracLoc).title(foodTruck.getName()));
+			}
+		}
+		catch (ExecutionException | InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+
 	}
 
 	@Override
