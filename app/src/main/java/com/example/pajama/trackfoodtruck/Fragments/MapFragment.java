@@ -62,14 +62,14 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
 
 	private void enableMyLocation()
 	{
-		if (ContextCompat.checkSelfPermission(this.getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION)
+		if (ContextCompat.checkSelfPermission(this.getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION)
 				== PackageManager.PERMISSION_GRANTED)
 		{
 			mLocationPermissionGranted = true;
 		}
 		else
 		{
-			ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.ACCESS_COARSE_LOCATION }, PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+			ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.ACCESS_FINE_LOCATION }, PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
 		}
 	}
 
