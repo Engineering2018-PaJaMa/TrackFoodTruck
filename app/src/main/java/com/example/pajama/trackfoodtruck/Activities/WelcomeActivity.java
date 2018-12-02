@@ -69,6 +69,7 @@ public class WelcomeActivity extends AppCompatActivity
 		public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
 			Fragment fragment;
+			MapFragment mapFragment;
 
 			switch (item.getItemId()) {
 				case R.id.navigation_home:
@@ -80,8 +81,7 @@ public class WelcomeActivity extends AppCompatActivity
 					loadFragment(fragment);
 					return true;
 				case R.id.navigation_map:
-					fragment = new MapFragment();
-					loadFragment(fragment);
+					startActivity(new Intent(WelcomeActivity.this, MapFragment.class));
 					return true;
 			}
 
