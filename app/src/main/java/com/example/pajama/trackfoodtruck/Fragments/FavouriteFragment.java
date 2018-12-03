@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import com.example.pajama.trackfoodtruck.Activities.DetailsActivity;
+import com.example.pajama.trackfoodtruck.Adapters.FavouriteFoodTruckListAdapter;
+import com.example.pajama.trackfoodtruck.Data.ApplicationData;
 import com.example.pajama.trackfoodtruck.Data.FoodTruck;
-import com.example.pajama.trackfoodtruck.ListAdapter.FavouriteFoodTruckListAdapter;
 import com.example.pajama.trackfoodtruck.R;
 import com.example.pajama.trackfoodtruck.httpTruckController.HttpGetAllTruck;
 
@@ -87,7 +88,7 @@ public class FavouriteFragment extends Fragment
 			public void onItemClick(
 					AdapterView<?> arg0, View arg1, int position, long arg3)
 			{
-				choosenFoodTruck = nameArray.get(position);
+				ApplicationData.choosenTrack = nameArray.get(position);
 				Intent intent = new Intent(getActivity(), DetailsActivity.class);
 				startActivity(intent);
 			}

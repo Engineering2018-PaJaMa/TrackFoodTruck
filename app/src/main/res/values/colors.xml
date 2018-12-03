@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+	<color name="colorPrimary">#191a19</color>
+	<color name="colorPrimaryDark">#3c3c3c</color>
     <color name="colorAccent">#d81b60</color>
-    <color name="colorTitle">#004d80</color>
+	<color name="colorTitle">#a54408</color>
 	<color name="colorTabBar">#FF668191</color>
 	<color name="White">#FFFFFF</color>
 	<color name="Ivory">#FFFFF0</color>
@@ -67,7 +67,7 @@
 	<color name="Thistle">#D8BFD8</color>
 	<color name="LightGrey">#D3D3D3</color>
 	<color name="Tan">#D2B48C</color>
-	<color name="Chocolate">#D2691E</color>
+	<color name="Chocolate">#cd661d</color>
 	<color name="Peru">#CD853F</color>
 	<color name="IndianRed">#CD5C5C</color>
 	<color name="MediumVioletRed">#C71585</color>
@@ -145,4 +145,5 @@
 	<color name="DarkBlue">#00008B</color>
 	<color name="Navy">#000080</color>
 	<color name="Black">#000000</color>
+	<color name="ReviewColor">#d17a3c</color>
 </resources>

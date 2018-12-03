@@ -1,4 +1,4 @@
-package com.example.pajama.trackfoodtruck.ListAdapter;
+package com.example.pajama.trackfoodtruck.Adapters;
 
 import android.view.View;
 import android.widget.AdapterView;

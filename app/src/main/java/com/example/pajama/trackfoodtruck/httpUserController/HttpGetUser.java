@@ -1,5 +1,8 @@
 package com.example.pajama.trackfoodtruck.httpUserController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
@@ -9,16 +12,13 @@ import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.pajama.trackfoodtruck.Data.User;
 
 import android.os.AsyncTask;
 import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HttpGetUser extends AsyncTask<String, Void, User>
 {
@@ -32,7 +32,9 @@ public class HttpGetUser extends AsyncTask<String, Void, User>
 	protected User doInBackground(String... arg)
 	{
         final String url = "http://212.191.92.88:51110/tft/user"; // the  url from where to fetch data(json) ip kompa
-        RestTemplate restTemplate = new RestTemplate();
+
+		RestTemplate restTemplate = new RestTemplate();
+
 
 		JSONObject newUser = null;
 		try
@@ -57,7 +59,17 @@ public class HttpGetUser extends AsyncTask<String, Void, User>
 		//restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 		restTemplate.setMessageConverters(messageConverters);
 
-		return restTemplate.postForObject(url,requestEntity, User.class);
+		try
+		{
+			return restTemplate.postForObject(url, requestEntity, User.class);
+		}
+		catch (HttpServerErrorException e)
+		{
+			Log.e("FoodTruck Server ERROR", e.toString());
+			User errMsg = new User();
+			errMsg.setErrorMsg(500);
+			return errMsg;
+		}
     }
 
     @Override
