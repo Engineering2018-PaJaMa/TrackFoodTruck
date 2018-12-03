@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
+import com.example.pajama.trackfoodtruck.Data.ApplicationData;
 import com.example.pajama.trackfoodtruck.Data.Review;
 import com.example.pajama.trackfoodtruck.Fragments.FavouriteFragment;
 import com.example.pajama.trackfoodtruck.ListAdapter.ReviewListAdapter;
@@ -49,7 +50,7 @@ public class DetailsActivity extends AppCompatActivity
 		setContentView(R.layout.activity_details);
 
 		HttpGetReviews reviewsProcess = new HttpGetReviews();
-		reviewsProcess.execute(FavouriteFragment.choosenFoodTruck);
+		reviewsProcess.execute(ApplicationData.choosenTrack);
 
 		try
 		{
