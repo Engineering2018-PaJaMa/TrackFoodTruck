@@ -1,8 +1,8 @@
 <android.support.v7.widget.Toolbar
+		xmlns:android="http://schemas.android.com/apk/res/android"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="@android:color/transparent"
-		android:theme="?attr/actionBarTheme"
+		android:theme="@style/AppTheme"
 		android:minHeight="?attr/actionBarSize"
-		android:id="@+id/ActivityToolbar"
-		xmlns:android="http://schemas.android.com/apk/res/android"/>
+		android:id="@+id/ActivityToolbar"/>

@@ -129,7 +129,6 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
 			{
 				mMap.setMyLocationEnabled(false);
 				mMap.getUiSettings().setMyLocationButtonEnabled(false);
-				Toast.makeText(this, "Need permission", Toast.LENGTH_LONG).show();
 				enableMyLocation();
 			}
 		}
