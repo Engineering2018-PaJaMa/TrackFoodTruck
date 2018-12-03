@@ -7,6 +7,7 @@ import java.util.concurrent.ExecutionException;
 import com.example.pajama.trackfoodtruck.Data.ApplicationData;
 import com.example.pajama.trackfoodtruck.Data.Review;
 import com.example.pajama.trackfoodtruck.Fragments.FavouriteFragment;
+import com.example.pajama.trackfoodtruck.Fragments.MapFragment;
 import com.example.pajama.trackfoodtruck.ListAdapter.ReviewListAdapter;
 import com.example.pajama.trackfoodtruck.R;
 import com.example.pajama.trackfoodtruck.httpReviewsController.HttpGetReviews;
@@ -104,6 +105,16 @@ public class DetailsActivity extends AppCompatActivity
 		listView = (ListView) findViewById(R.id.reviewsList);
 		listView.setAdapter(reviewListAdapter);
 
+		Button goToMap = (Button) findViewById(R.id.toMapButton);
+		goToMap.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				goToMap(ApplicationData.choosenTrack);
+			}
+		});
+
 		Button clickButton = (Button) findViewById(R.id.addOpinionButton);
 		clickButton.setOnClickListener( new View.OnClickListener() {
 
@@ -137,8 +148,6 @@ public class DetailsActivity extends AppCompatActivity
 
 		}
 	}
-
-
 
 	public void addOpinion() {
 
@@ -187,7 +196,7 @@ public class DetailsActivity extends AppCompatActivity
 				String headlineText = inputHeadline.getText().toString();
 				String bodyText = inputBody.getText().toString();
 				String raiting = raitingSpiner.getSelectedItem().toString();
-				putReviewProcess.execute(FavouriteFragment.choosenFoodTruck, headlineText, bodyText, raiting, LoginActivity.currentLogInUser);
+				putReviewProcess.execute(ApplicationData.choosenTrack, headlineText, bodyText, raiting, LoginActivity.currentLogInUser);
 			}
 		});
 		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -200,4 +209,9 @@ public class DetailsActivity extends AppCompatActivity
 		builder.show();
 	}
 
+	public void goToMap(String choosenTrack)
+	{
+		ApplicationData.trackForMap = choosenTrack;
+		startActivity(new Intent(DetailsActivity.this, MapFragment.class));
+	}
 }

@@ -1,10 +1,13 @@
 package com.example.pajama.trackfoodtruck.Fragments;
 
+import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
+import com.example.pajama.trackfoodtruck.Data.ApplicationData;
 import com.example.pajama.trackfoodtruck.Data.FoodTruck;
 import com.example.pajama.trackfoodtruck.R;
 import com.example.pajama.trackfoodtruck.httpTruckController.HttpGetAllTruck;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -28,6 +31,7 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
 	private GoogleMap mMap;
 	private boolean mLocationPermissionGranted;
 	private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
+	private HashMap<String, LatLng> locationOfFoodTracks = new HashMap<>();
 
 	public MapFragment()
 	{
@@ -48,8 +52,7 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
 	public void onMapReady(GoogleMap googleMap)
 	{
 		mMap = googleMap;
-		enableMyLocation();
-		updateLocationUI();
+
 
 		HttpGetAllTruck allTrucksTask = new HttpGetAllTruck();
 		allTrucksTask.execute();
@@ -59,6 +62,7 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
 			for (FoodTruck foodTruck : allTrucksTask.get())
 			{
 				LatLng foodTracLoc = new LatLng(foodTruck.getLocation().getLatitude(), foodTruck.getLocation().getLatitude());
+				locationOfFoodTracks.put(foodTruck.getName(), foodTracLoc);
 				mMap.addMarker(new MarkerOptions().position(foodTracLoc).title(foodTruck.getName()));
 			}
 		}
@@ -66,7 +70,8 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
 		{
 			e.printStackTrace();
 		}
-
+		enableMyLocation();
+		updateLocationUI();
 	}
 
 	@Override
@@ -122,8 +127,18 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
 		{
 			if (mLocationPermissionGranted)
 			{
-				mMap.setMyLocationEnabled(true);
-				mMap.getUiSettings().setMyLocationButtonEnabled(true);
+
+				if (ApplicationData.trackForMap == null)
+				{
+					mMap.setMyLocationEnabled(true);
+					mMap.getUiSettings().setMyLocationButtonEnabled(true);
+				}
+				else
+				{
+					mMap.moveCamera(CameraUpdateFactory.newLatLng(locationOfFoodTracks.get(ApplicationData.trackForMap)));
+					mMap.setMyLocationEnabled(true);
+					mMap.getUiSettings().setMyLocationButtonEnabled(true);
+				}
 			}
 			else
 			{

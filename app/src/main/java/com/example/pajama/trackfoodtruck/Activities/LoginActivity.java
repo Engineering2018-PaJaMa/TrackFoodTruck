@@ -1,11 +1,20 @@
 package com.example.pajama.trackfoodtruck.Activities;
 
+import static org.springframework.http.HttpStatus.Series.CLIENT_ERROR;
+import static org.springframework.http.HttpStatus.Series.SERVER_ERROR;
+
+import java.io.IOException;
 import java.util.concurrent.ExecutionException;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.web.client.ResponseErrorHandler;
 
 import com.example.pajama.trackfoodtruck.R;
 import com.example.pajama.trackfoodtruck.httpUserController.HttpGetUser;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,7 +22,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class LoginActivity extends AppCompatActivity
+public class LoginActivity extends AppCompatActivity implements ResponseErrorHandler
 {
 
 	TextView emailForm;
@@ -40,19 +49,18 @@ public class LoginActivity extends AppCompatActivity
 		String password = passwordForm.getText().toString();
 		Log.i("Email: ", email);
 		Log.i(" Password: ", password);
-		HttpGetUser userProcess = new HttpGetUser();
-		userProcess.execute(email, password);
 
-		if (userProcess.get().getEmail().equals(email) && userProcess.get().getPassword().equals(password))
+		HttpGetUser userProcess = new HttpGetUser();
+
+		if (userProcess.execute(email, password).get().getErrorMsg().equals(500))
+		{
+			Toast.makeText(getApplicationContext(), "Can't find such user", Toast.LENGTH_SHORT).show();
+		}
+		else
 		{
 			currentLogInUser = userProcess.get().getLogin();
 			Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
 			startActivity(intent);
-		}
-		else
-		{
-			Log.e("Fail login", "Wrong data");
-			Toast.makeText(getApplicationContext(), "There is no such user", Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -61,4 +69,29 @@ public class LoginActivity extends AppCompatActivity
 		Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
 		startActivity(intent);
 	}
+
+	@Override
+	public boolean hasError(ClientHttpResponse response) throws IOException
+	{
+		return (response.getStatusCode().series() == CLIENT_ERROR || response.getStatusCode().series() == SERVER_ERROR);
+	}
+
+	@Override
+	public void handleError(ClientHttpResponse response) throws IOException
+	{
+		if (response.getStatusCode().series() == HttpStatus.Series.SERVER_ERROR)
+		{
+			// handle SERVER_ERROR
+
+		}
+		else if (response.getStatusCode().series() == HttpStatus.Series.CLIENT_ERROR)
+		{
+			// handle CLIENT_ERROR
+			if (response.getStatusCode() == HttpStatus.NOT_FOUND)
+			{
+				throw new Resources.NotFoundException();
+			}
+		}
+	}
+
 }

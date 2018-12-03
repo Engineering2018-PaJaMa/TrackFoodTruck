@@ -13,10 +13,19 @@
 			android:layout_height="wrap_content" app:srcCompat="@drawable/foodtruckimage" tools:layout_editor_absoluteY="16dp"
 			android:id="@+id/foodTruckDetailImage" tools:layout_editor_absoluteX="8dp" android:scaleType="fitStart" android:cropToPadding="true"
 			android:adjustViewBounds="true"/>
-	<TextView
-			android:layout_width="match_parent"
-			android:textSize="20dp"
-			android:layout_height="wrap_content" android:id="@+id/foodTruckNametextView" android:padding="5dp"/>
+	<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+		<TextView
+				android:layout_width="match_parent"
+				android:textSize="20dp"
+				android:layout_height="wrap_content" android:id="@+id/foodTruckNametextView" android:padding="5dp" android:layout_weight="1"/>
+		<Button
+				android:layout_width="50dp"
+				android:layout_height="wrap_content" android:id="@+id/toMapButton" android:layout_weight="1" android:background="@drawable/ic_map"
+				android:elevation="0dp" android:backgroundTint="@color/Chocolate"/>
+	</LinearLayout>
 	<TextView
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content" android:id="@+id/foodTruckFoodTypetextView" android:padding="5dp"/>

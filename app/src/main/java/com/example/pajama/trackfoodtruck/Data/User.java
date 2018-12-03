@@ -1,6 +1,10 @@
 package com.example.pajama.trackfoodtruck.Data;
 
+import java.util.Map;
+
 public class User {
+
+	private Map<String, Object> _id;
 
 	private String login;
 
@@ -8,6 +12,27 @@ public class User {
 
 	private String email;
 
+	private Integer errorMsg = 0;
+
+	public Integer getErrorMsg()
+	{
+		return errorMsg;
+	}
+
+	public void setErrorMsg(Integer errorMsg)
+	{
+		this.errorMsg = errorMsg;
+	}
+
+	public Map<String, Object> get_id()
+	{
+		return _id;
+	}
+
+	public void set_id(Map<String, Object> _id)
+	{
+		this._id = _id;
+	}
     public String getLogin() {
         return login;
     }
