@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import com.example.pajama.trackfoodtruck.Activities.DetailsActivity;
+import com.example.pajama.trackfoodtruck.Adapters.FavouriteFoodTruckListAdapter;
 import com.example.pajama.trackfoodtruck.Data.ApplicationData;
 import com.example.pajama.trackfoodtruck.Data.FoodTruck;
-import com.example.pajama.trackfoodtruck.ListAdapter.FavouriteFoodTruckListAdapter;
 import com.example.pajama.trackfoodtruck.R;
 import com.example.pajama.trackfoodtruck.httpTruckController.HttpGetAllTruck;
 

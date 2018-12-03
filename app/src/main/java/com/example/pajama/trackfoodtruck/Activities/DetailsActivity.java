@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
+import com.example.pajama.trackfoodtruck.Adapters.PhotoViewAdapter;
+import com.example.pajama.trackfoodtruck.Adapters.ReviewListAdapter;
 import com.example.pajama.trackfoodtruck.Data.ApplicationData;
 import com.example.pajama.trackfoodtruck.Data.Review;
 import com.example.pajama.trackfoodtruck.Fragments.FavouriteFragment;
 import com.example.pajama.trackfoodtruck.Fragments.MapFragment;
-import com.example.pajama.trackfoodtruck.ListAdapter.ReviewListAdapter;
 import com.example.pajama.trackfoodtruck.R;
 import com.example.pajama.trackfoodtruck.httpReviewsController.HttpGetReviews;
 import com.example.pajama.trackfoodtruck.httpReviewsController.HttpPutReview;
@@ -18,6 +19,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -87,6 +89,10 @@ public class DetailsActivity extends AppCompatActivity
 		{
 			Log.e("Error", "Error with reading truck info");
 		}
+
+		ViewPager photoViewPager = findViewById(R.id.photoViewPager);
+		PhotoViewAdapter adapter = new PhotoViewAdapter(this);
+		photoViewPager.setAdapter(adapter);
 
 		Toolbar myToolbar = findViewById(R.id.ActivityToolbar);
 		setSupportActionBar(myToolbar);
