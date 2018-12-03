@@ -56,7 +56,6 @@ public class HttpGetUser extends AsyncTask<String, Void, User>
 		messageConverters.add(new StringHttpMessageConverter());
 		messageConverters.add(new MappingJackson2HttpMessageConverter());
 
-		//restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 		restTemplate.setMessageConverters(messageConverters);
 
 		try

@@ -2,7 +2,9 @@ package com.example.pajama.trackfoodtruck.Adapters;
 
 import java.util.ArrayList;
 
+import com.example.pajama.trackfoodtruck.Activities.LoginActivity;
 import com.example.pajama.trackfoodtruck.R;
+import com.example.pajama.trackfoodtruck.httpUserController.HttpSetFavourite;
 
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -10,9 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 public class FoodTruckListAdapter extends ArrayAdapter
 {
@@ -43,23 +48,37 @@ public class FoodTruckListAdapter extends ArrayAdapter
 
 	}
 
-	public View getView(int position, View view, ViewGroup parent) {
+	public View getView(final int position, View view, ViewGroup parent)
+	{
 		LayoutInflater inflater=context.getLayoutInflater();
 		View rowView=inflater.inflate(R.layout.listview_row, null,true);
+
+		final HttpSetFavourite setFavourite = new HttpSetFavourite();
 
 		TextView nameTextField = rowView.findViewById(R.id.foodTruckNameTextView);
 		TextView infoTextField = rowView.findViewById(R.id.foodTruckInfoTextView);
 		TextView cuisineTextField = rowView.findViewById(R.id.cuisineTextView);
 		RatingBar ratingBar = rowView.findViewById(R.id.ratingBar);
 		ImageView imageView = rowView.findViewById(R.id.foodTruckimageView);
+		ToggleButton favButton = (ToggleButton) rowView.findViewById(R.id.favouriteButton);
 
 		nameTextField.setText(nameArray.get(position));
 		Log.e("QQQQQQQQ", nameArray.get(position));
 		infoTextField.setText(infoArray.get(position));
 		cuisineTextField.setText(cuisineArray.get(position));
 		ratingBar.setRating(raitingArray.get(position).floatValue());
-		//imageView.setImageResource(imageArray.get(position)); TODO:Images
-
+		favButton.setChecked(false);
+		favButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+		{
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+			{
+				if (isChecked)
+					setFavourite.execute(LoginActivity.currentLogInUser, nameArray.get(position));
+				else
+					Toast.makeText(FoodTruckListAdapter.super.getContext(), "Juz dodany", Toast.LENGTH_LONG).show();
+			}
+		});
 		return rowView;
 
 	};

@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 public class FavouriteFoodTruckListAdapter extends ArrayAdapter
 {
@@ -49,7 +50,7 @@ public class FavouriteFoodTruckListAdapter extends ArrayAdapter
 		TextView cuisineTextField = rowView.findViewById(R.id.cuisineTextView);
 		RatingBar ratingBar = rowView.findViewById(R.id.ratingBar);
 		ImageView imageView = rowView.findViewById(R.id.foodTruckimageView);
-
+		ToggleButton favButton = (ToggleButton) rowView.findViewById(R.id.favouriteButton);
 
 		nameTextField.setText(nameArray.get(position));
 		Log.e("QQQQQQQQ", nameArray.get(position));
