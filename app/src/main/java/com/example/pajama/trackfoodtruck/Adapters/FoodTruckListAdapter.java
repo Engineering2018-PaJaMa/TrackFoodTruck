@@ -1,11 +1,13 @@
 package com.example.pajama.trackfoodtruck.Adapters;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import com.example.pajama.trackfoodtruck.Activities.LoginActivity;
 import com.example.pajama.trackfoodtruck.R;
 import com.example.pajama.trackfoodtruck.httpUserController.HttpSetFavourite;
 
+import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -53,8 +55,6 @@ public class FoodTruckListAdapter extends ArrayAdapter
 		LayoutInflater inflater=context.getLayoutInflater();
 		View rowView=inflater.inflate(R.layout.listview_row, null,true);
 
-		final HttpSetFavourite setFavourite = new HttpSetFavourite();
-
 		TextView nameTextField = rowView.findViewById(R.id.foodTruckNameTextView);
 		TextView infoTextField = rowView.findViewById(R.id.foodTruckInfoTextView);
 		TextView cuisineTextField = rowView.findViewById(R.id.cuisineTextView);
@@ -70,15 +70,31 @@ public class FoodTruckListAdapter extends ArrayAdapter
 		favButton.setChecked(false);
 		favButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
 		{
+			HttpSetFavourite setFavourite = new HttpSetFavourite();
+
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
 			{
-				if (isChecked)
-					setFavourite.execute(LoginActivity.currentLogInUser, nameArray.get(position));
+				if (isChecked && setFavourite.getStatus() == AsyncTask.Status.RUNNING)
+				{
+					try
+					{
+						if (setFavourite.execute(LoginActivity.currentLogInUser, nameArray.get(position)).get())
+						{
+							Toast.makeText(FoodTruckListAdapter.super.getContext(), "Dodano do ulubionych", Toast.LENGTH_LONG).show();
+						}
+					}
+					catch (ExecutionException | InterruptedException e)
+					{
+						e.printStackTrace();
+					}
+				}
 				else
 					Toast.makeText(FoodTruckListAdapter.super.getContext(), "Juz dodany", Toast.LENGTH_LONG).show();
+
 			}
 		});
+
 		return rowView;
 
 	};
