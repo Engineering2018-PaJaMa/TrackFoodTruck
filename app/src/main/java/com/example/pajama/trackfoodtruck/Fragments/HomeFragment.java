@@ -4,16 +4,17 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import com.example.pajama.trackfoodtruck.Activities.DetailsActivity;
+import com.example.pajama.trackfoodtruck.Activities.LoginActivity;
 import com.example.pajama.trackfoodtruck.Adapters.FoodTruckListAdapter;
 import com.example.pajama.trackfoodtruck.Data.ApplicationData;
 import com.example.pajama.trackfoodtruck.Data.FoodTruck;
 import com.example.pajama.trackfoodtruck.R;
 import com.example.pajama.trackfoodtruck.httpTruckController.HttpGetAllTruck;
+import com.example.pajama.trackfoodtruck.httpUserController.HttpGetUser;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,8 +35,6 @@ public class HomeFragment extends Fragment
 
 	ListView listView;
 
-	public static String choosenFoodTruck;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -50,6 +49,9 @@ public class HomeFragment extends Fragment
 
 		HttpGetAllTruck truckProcess = new HttpGetAllTruck();
 		truckProcess.execute();
+
+		HttpGetUser getUser = new HttpGetUser();
+		getUser.execute(LoginActivity.currentUserEmail);
 
 		try
 		{
@@ -67,9 +69,15 @@ public class HomeFragment extends Fragment
 		{
 			e.printStackTrace();
 		}
-		Log.e("qq", nameArray.get(0));
 
-		FoodTruckListAdapter foodTruckListAdapter = new FoodTruckListAdapter(getActivity(), nameArray, infoArray, imageArray, cuisineArray, raitingArray);
+		FoodTruckListAdapter foodTruckListAdapter = new FoodTruckListAdapter(
+				getActivity(),
+				nameArray,
+				infoArray,
+				imageArray,
+				cuisineArray,
+				raitingArray,
+				getUser);
 
 		listView = view.findViewById(R.id.welcomeListView);
 		listView.setAdapter(foodTruckListAdapter);

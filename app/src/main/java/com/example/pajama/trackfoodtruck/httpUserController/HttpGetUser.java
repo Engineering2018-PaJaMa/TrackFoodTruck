@@ -31,15 +31,21 @@ public class HttpGetUser extends AsyncTask<String, Void, User>
     @Override
 	protected User doInBackground(String... arg)
 	{
-        final String url = "http://212.191.92.88:51110/tft/user"; // the  url from where to fetch data(json) ip kompa
+		final String url = "http://212.191.92.88:51110/tft/user"; // the  url from where to fetch data(json) ip kompa
 
 		RestTemplate restTemplate = new RestTemplate();
-
 
 		JSONObject newUser = null;
 		try
 		{
-			newUser = new JSONObject().put("password", arg[1]).put("email", arg[0]);
+			if (arg.length == 1)
+			{
+				newUser = new JSONObject().put("email", arg[0]);
+			}
+			else
+			{
+				newUser = new JSONObject().put("password", arg[1]).put("email", arg[0]);
+			}
 		}
 		catch (JSONException e)
 		{
@@ -49,14 +55,12 @@ public class HttpGetUser extends AsyncTask<String, Void, User>
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.setContentType(new MediaType("application", "json"));
 		HttpEntity<String> requestEntity = new HttpEntity<>(newUser.toString(),requestHeaders);
-		Log.e("qqq",newUser.toString());
 
 		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
 		messageConverters.add(new FormHttpMessageConverter());
 		messageConverters.add(new StringHttpMessageConverter());
 		messageConverters.add(new MappingJackson2HttpMessageConverter());
 
-		//restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 		restTemplate.setMessageConverters(messageConverters);
 
 		try

@@ -17,7 +17,7 @@
 		<TextView
 				android:layout_width="match_parent"
 				android:textSize="20dp"
-				android:layout_height="wrap_content" android:id="@+id/foodTruckNametextView" android:padding="5dp" android:layout_weight="1"
+				android:layout_height="wrap_content" android:id="@+id/foodTruckNameTextDetail" android:padding="5dp" android:layout_weight="1"
 				android:textColor="@color/Chocolate"/>
 		<Button
 				android:layout_width="50dp"
@@ -26,10 +26,10 @@
 	</LinearLayout>
 	<TextView
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content" android:id="@+id/foodTruckFoodTypetextView" android:padding="5dp" android:textColor="@color/Chocolate"/>
+			android:layout_height="wrap_content" android:id="@+id/foodTruckFoodTypeTextDetail" android:padding="5dp" android:textColor="@color/Chocolate"/>
 	<TextView
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content" android:id="@+id/foodTruckDescriptiontextView" android:padding="5dp" android:textColor="@color/Chocolate"/>
+			android:layout_height="wrap_content" android:id="@+id/foodTruckDescriptionTextDetail" android:padding="5dp" android:textColor="@color/Chocolate"/>
 	<LinearLayout
 			android:orientation="horizontal"
 			android:layout_width="wrap_content"

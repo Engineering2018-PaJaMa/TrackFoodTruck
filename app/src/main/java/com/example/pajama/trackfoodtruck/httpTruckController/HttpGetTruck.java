@@ -54,7 +54,6 @@ public class HttpGetTruck extends AsyncTask<String, Void, FoodTruck>
 		messageConverters.add(new StringHttpMessageConverter());
 		messageConverters.add(new MappingJackson2HttpMessageConverter());
 
-		//restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 		restTemplate.setMessageConverters(messageConverters);
 
 		return restTemplate.postForObject(url, requestEntity, FoodTruck.class);

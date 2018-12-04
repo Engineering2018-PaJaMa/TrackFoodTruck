@@ -1,5 +1,6 @@
 package com.example.pajama.trackfoodtruck.Data;
 
+import java.util.List;
 import java.util.Map;
 
 public class User {
@@ -13,6 +14,18 @@ public class User {
 	private String email;
 
 	private Integer errorMsg = 0;
+
+	private List<String> favouriteFoodTrucks;
+
+	public List<String> getFavouriteFoodTrucks()
+	{
+		return favouriteFoodTrucks;
+	}
+
+	public void setFavouriteFoodTrucks(List<String> favouriteFoodTrucks)
+	{
+		this.favouriteFoodTrucks = favouriteFoodTrucks;
+	}
 
 	public Integer getErrorMsg()
 	{
@@ -33,7 +46,8 @@ public class User {
 	{
 		this._id = _id;
 	}
-    public String getLogin() {
+
+	public String getLogin() {
         return login;
     }
 

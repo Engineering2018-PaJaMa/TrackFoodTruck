@@ -4,16 +4,17 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import com.example.pajama.trackfoodtruck.Activities.DetailsActivity;
+import com.example.pajama.trackfoodtruck.Activities.LoginActivity;
 import com.example.pajama.trackfoodtruck.Adapters.FavouriteFoodTruckListAdapter;
 import com.example.pajama.trackfoodtruck.Data.ApplicationData;
 import com.example.pajama.trackfoodtruck.Data.FoodTruck;
 import com.example.pajama.trackfoodtruck.R;
 import com.example.pajama.trackfoodtruck.httpTruckController.HttpGetAllTruck;
+import com.example.pajama.trackfoodtruck.httpUserController.HttpGetUser;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,8 @@ public class FavouriteFragment extends Fragment
 
 	ArrayList<Double> raitingArray = new ArrayList<>();
 
+	ArrayList<String> favouriteArray = new ArrayList<>();
+
 	ListView listView;
 
 	public static String choosenFoodTruck;
@@ -51,33 +54,38 @@ public class FavouriteFragment extends Fragment
 		HttpGetAllTruck truckProcess = new HttpGetAllTruck();
 		truckProcess.execute();
 
+		HttpGetUser getUser = new HttpGetUser();
+		getUser.execute(LoginActivity.currentUserEmail);
 
 		try
 		{
+			favouriteArray.addAll(getUser.get().getFavouriteFoodTrucks());
 			for (FoodTruck foodTruck : truckProcess.get())
 			{
-
-				nameArray.add(foodTruck.getName());
-				infoArray.add(foodTruck.getDescription());
-				imageArray.add(foodTruck.getPhoto());
-				cuisineArray.add(foodTruck.getCuisine());
-				raitingArray.add(foodTruck.getRating());
+				for (String favFoodTrack : favouriteArray)
+				{
+					if (foodTruck.getName().equals(favFoodTrack))
+					{
+						nameArray.add(foodTruck.getName());
+						infoArray.add(foodTruck.getDescription());
+						imageArray.add(foodTruck.getPhoto());
+						cuisineArray.add(foodTruck.getCuisine());
+						raitingArray.add(foodTruck.getRating());
+					}
+				}
 			}
 		}
 		catch (ExecutionException | InterruptedException e)
 		{
 			e.printStackTrace();
 		}
-		Log.e("qq", nameArray.get(0));
-
 
 		FavouriteFoodTruckListAdapter favouriteFoodTruckListAdapter = new FavouriteFoodTruckListAdapter(
 				getActivity(),
 				nameArray,
 				infoArray,
 				imageArray,
-				cuisineArray,
-				raitingArray);
+				cuisineArray, raitingArray, getUser);
 
 		listView = view.findViewById(R.id.favouriteListView);
 		listView.setAdapter(favouriteFoodTruckListAdapter);

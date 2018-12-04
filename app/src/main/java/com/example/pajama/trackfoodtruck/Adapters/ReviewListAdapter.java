@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 public class ReviewListAdapter extends ArrayAdapter
@@ -17,8 +18,14 @@ public class ReviewListAdapter extends ArrayAdapter
 	private final ArrayList<String> dateArray;
 	private final ArrayList<String> authorNameArray;
 	private final ArrayList<String> reviewArray;
+	private final ArrayList<Float> raitingArray;
 
-	public ReviewListAdapter(Activity context, ArrayList<String> dateArray, ArrayList<String> authorNameArray, ArrayList<String> reviewArrayParam)
+	public ReviewListAdapter(
+			Activity context,
+			ArrayList<String> dateArray,
+			ArrayList<String> authorNameArray,
+			ArrayList<String> reviewArrayParam,
+			ArrayList<Float> raitingArray)
 	{
 
 		super(context, R.layout.listview_row, reviewArrayParam);
@@ -27,6 +34,7 @@ public class ReviewListAdapter extends ArrayAdapter
 		this.dateArray = dateArray;
 		this.authorNameArray = authorNameArray;
 		this.reviewArray = reviewArrayParam;
+		this.raitingArray = raitingArray;
 
 	}
 
@@ -38,10 +46,12 @@ public class ReviewListAdapter extends ArrayAdapter
 		TextView dateTextField = rowView.findViewById(R.id.detailDateTextView);
 		TextView authorNameTextField = rowView.findViewById(R.id.detailsAuthorReviewextView);
 		TextView reviewTextField = rowView.findViewById(R.id.reviewTextView);
+		RatingBar ratingBar = rowView.findViewById(R.id.ratingBar2);
 
 		dateTextField.setText(dateArray.get(position));
 		authorNameTextField.setText(authorNameArray.get(position));
 		reviewTextField.setText(reviewArray.get(position));
+		ratingBar.setRating(raitingArray.get(position));
 
 		return rowView;
 

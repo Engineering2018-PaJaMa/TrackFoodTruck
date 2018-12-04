@@ -7,8 +7,8 @@ public class Location {
 
     private String country;
     private String city;
-    private Integer latitude;
-    private Integer longitude;
+	private Float latitude;
+	private Float longitude;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
 	public String getCountry()
@@ -28,19 +28,23 @@ public class Location {
         this.city = city;
     }
 
-    public Integer getLatitude() {
+	public Float getLatitude()
+	{
         return latitude;
     }
 
-    public void setLatitude(Integer latitude) {
+	public void setLatitude(Float latitude)
+	{
         this.latitude = latitude;
     }
 
-    public Integer getLongitude() {
+	public Float getLongitude()
+	{
         return longitude;
     }
 
-    public void setLongitude(Integer longitude) {
+	public void setLongitude(Float longitude)
+	{
         this.longitude = longitude;
     }
 

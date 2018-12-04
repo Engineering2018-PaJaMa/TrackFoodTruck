@@ -7,11 +7,13 @@ import com.example.pajama.trackfoodtruck.Data.ApplicationData;
 import com.example.pajama.trackfoodtruck.Data.FoodTruck;
 import com.example.pajama.trackfoodtruck.R;
 import com.example.pajama.trackfoodtruck.httpTruckController.HttpGetAllTruck;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.Manifest;
@@ -32,6 +34,7 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
 	private boolean mLocationPermissionGranted;
 	private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 	private HashMap<String, LatLng> locationOfFoodTracks = new HashMap<>();
+	private LatLngBounds LODZ = new LatLngBounds(new LatLng(51.7577, 19.3931), new LatLng(51.7703, 19.5257));
 
 	public MapFragment()
 	{
@@ -61,7 +64,7 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
 		{
 			for (FoodTruck foodTruck : allTrucksTask.get())
 			{
-				LatLng foodTracLoc = new LatLng(foodTruck.getLocation().getLatitude(), foodTruck.getLocation().getLatitude());
+				LatLng foodTracLoc = new LatLng(foodTruck.getLocation().getLatitude(), foodTruck.getLocation().getLongitude());
 				locationOfFoodTracks.put(foodTruck.getName(), foodTracLoc);
 				mMap.addMarker(new MarkerOptions().position(foodTracLoc).title(foodTruck.getName()));
 			}
@@ -70,6 +73,7 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
 		{
 			e.printStackTrace();
 		}
+
 		enableMyLocation();
 		updateLocationUI();
 	}
@@ -130,12 +134,15 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
 
 				if (ApplicationData.trackForMap == null)
 				{
+					mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LODZ.getCenter(), 10));
 					mMap.setMyLocationEnabled(true);
 					mMap.getUiSettings().setMyLocationButtonEnabled(true);
 				}
 				else
 				{
 					mMap.moveCamera(CameraUpdateFactory.newLatLng(locationOfFoodTracks.get(ApplicationData.trackForMap)));
+					CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(locationOfFoodTracks.get(ApplicationData.trackForMap), 15);
+					mMap.animateCamera(cameraUpdate);
 					mMap.setMyLocationEnabled(true);
 					mMap.getUiSettings().setMyLocationButtonEnabled(true);
 				}

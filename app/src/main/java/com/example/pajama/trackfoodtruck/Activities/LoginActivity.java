@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity implements ResponseErrorHan
 	TextView emailForm;
 	TextView passwordForm;
 	public static String currentLogInUser;
+	public static String currentUserEmail;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -51,14 +52,16 @@ public class LoginActivity extends AppCompatActivity implements ResponseErrorHan
 		Log.i(" Password: ", password);
 
 		HttpGetUser userProcess = new HttpGetUser();
+		userProcess.execute(email, password);
 
-		if (userProcess.execute(email, password).get().getErrorMsg().equals(500))
+		if (userProcess.get().getErrorMsg().equals(500))
 		{
 			Toast.makeText(getApplicationContext(), "Can't find such user", Toast.LENGTH_SHORT).show();
 		}
 		else
 		{
 			currentLogInUser = userProcess.get().getLogin();
+			currentUserEmail = userProcess.get().getEmail();
 			Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
 			startActivity(intent);
 		}
