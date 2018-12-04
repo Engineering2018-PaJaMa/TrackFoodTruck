@@ -73,7 +73,7 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
 		{
 			e.printStackTrace();
 		}
-
+		Log.e("ffffo", locationOfFoodTracks.toString());
 		enableMyLocation();
 		updateLocationUI();
 	}

@@ -3,8 +3,11 @@ package com.example.pajama.trackfoodtruck.Data;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class User {
 
+	@JsonIgnore
 	private Map<String, Object> _id;
 
 	private String login;
