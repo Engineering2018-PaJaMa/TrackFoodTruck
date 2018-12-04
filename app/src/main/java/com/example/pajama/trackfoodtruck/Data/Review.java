@@ -2,9 +2,11 @@ package com.example.pajama.trackfoodtruck.Data;
 
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Review
 {
-
+	@JsonIgnore
 	private Map<String, Object> _id;
 	private String restaurantName;
 	private String headline;
