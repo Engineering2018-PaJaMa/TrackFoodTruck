@@ -13,7 +13,6 @@ import com.example.pajama.trackfoodtruck.httpTruckController.HttpGetAllTruck;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +66,6 @@ public class HomeFragment extends Fragment
 		{
 			e.printStackTrace();
 		}
-		Log.e("qq", nameArray.get(0));
 
 		FoodTruckListAdapter foodTruckListAdapter = new FoodTruckListAdapter(getActivity(), nameArray, infoArray, imageArray, cuisineArray, raitingArray);
 

@@ -8,7 +8,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
-import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,6 +15,7 @@ import com.example.pajama.trackfoodtruck.Data.User;
 import com.example.pajama.trackfoodtruck.Data.UserProperties;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class HttpDeleteFavourite extends AsyncTask<String, Void, Boolean>
 {
@@ -42,13 +42,13 @@ public class HttpDeleteFavourite extends AsyncTask<String, Void, Boolean>
 		delFavFoodTrack.setName(arg[0]);
 		delFavFoodTrack.setFavouriteFoodTrucks(tmpList);
 
-		HttpEntity<UserProperties> entity = new HttpEntity<>(delFavFoodTrack);
+		HttpEntity<UserProperties> entity = new HttpEntity<>(delFavFoodTrack, requestHeaders);
 
 		restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-		restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+		//restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
 
 		restTemplate.exchange(url, HttpMethod.DELETE, entity, User.class);
-
+		Log.e("qqww", "FOOD TRACK DELETE");
 		return true;
 	}
 

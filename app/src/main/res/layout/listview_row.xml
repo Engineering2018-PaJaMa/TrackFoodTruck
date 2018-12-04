@@ -33,7 +33,8 @@
 			<ToggleButton
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:id="@+id/favouriteButton"/>
+					android:focusable="false"
+					android:id="@+id/favouriteButton" android:textOff="Add" android:textOn="Added"/>
 		</LinearLayout>
 
 		<TextView

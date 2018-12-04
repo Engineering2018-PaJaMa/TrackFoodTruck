@@ -57,7 +57,6 @@ public class FavouriteFragment extends Fragment
 		HttpGetUser getUser = new HttpGetUser();
 		getUser.execute(LoginActivity.currentUserEmail);
 
-		int i = 0;
 		try
 		{
 			favouriteArray.addAll(getUser.get().getFavouriteFoodTrucks());
@@ -73,7 +72,6 @@ public class FavouriteFragment extends Fragment
 						cuisineArray.add(foodTruck.getCuisine());
 						raitingArray.add(foodTruck.getRating());
 					}
-					i++;
 				}
 			}
 		}
