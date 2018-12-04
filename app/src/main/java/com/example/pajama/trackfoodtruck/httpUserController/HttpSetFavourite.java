@@ -28,7 +28,7 @@ public class HttpSetFavourite extends AsyncTask<String, Void, Boolean>
 	@Override
 	protected Boolean doInBackground(String... arg)
 	{
-		final String url = "http://192.168.1.101:8080/tft/user/favourites"; // the  url from where to fetch data(json)
+		final String url = "http://212.191.92.88:51110/tft/user/favourites"; // the  url from where to fetch data(json)
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders requestHeaders = new HttpHeaders();
 

@@ -31,7 +31,7 @@ public class HttpGetUser extends AsyncTask<String, Void, User>
     @Override
 	protected User doInBackground(String... arg)
 	{
-		final String url = "http://192.168.1.101:8080/tft/user"; // the  url from where to fetch data(json) ip kompa
+		final String url = "http://212.191.92.88:51110/tft/user"; // the  url from where to fetch data(json) ip kompa
 
 		RestTemplate restTemplate = new RestTemplate();
 
@@ -55,7 +55,6 @@ public class HttpGetUser extends AsyncTask<String, Void, User>
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.setContentType(new MediaType("application", "json"));
 		HttpEntity<String> requestEntity = new HttpEntity<>(newUser.toString(),requestHeaders);
-		Log.e("qqq",newUser.toString());
 
 		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
 		messageConverters.add(new FormHttpMessageConverter());
@@ -66,9 +65,7 @@ public class HttpGetUser extends AsyncTask<String, Void, User>
 
 		try
 		{
-			User backUser = restTemplate.postForObject(url, requestEntity, User.class);
-			Log.e("qqqwww", backUser.getFavouriteFoodTrucks().toString());
-			return backUser;
+			return restTemplate.postForObject(url, requestEntity, User.class);
 		}
 		catch (HttpServerErrorException e)
 		{

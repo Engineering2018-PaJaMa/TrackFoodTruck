@@ -15,7 +15,6 @@ import com.example.pajama.trackfoodtruck.Data.User;
 import com.example.pajama.trackfoodtruck.Data.UserProperties;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 public class HttpDeleteFavourite extends AsyncTask<String, Void, Boolean>
 {
@@ -29,7 +28,7 @@ public class HttpDeleteFavourite extends AsyncTask<String, Void, Boolean>
 	@Override
 	protected Boolean doInBackground(String... arg)
 	{
-		final String url = "http://192.168.1.101:8080/tft/user/favourites"; // the  url from where to fetch data(json)
+		final String url = "http://212.191.92.88:51110/tft/user/favourites"; // the  url from where to fetch data(json)
 		RestTemplate restTemplate = new RestTemplate(new SimpleClientHttpRequestFactory());
 		HttpHeaders requestHeaders = new HttpHeaders();
 
@@ -48,7 +47,6 @@ public class HttpDeleteFavourite extends AsyncTask<String, Void, Boolean>
 		//restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
 
 		restTemplate.exchange(url, HttpMethod.DELETE, entity, User.class);
-		Log.e("qqww", "FOOD TRACK DELETE");
 		return true;
 	}
 

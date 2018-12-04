@@ -26,7 +26,7 @@ public class HttpPutReview extends AsyncTask<String, Void, Boolean>
 	protected Boolean doInBackground(String... arg)
 	{
 		final String url = "http://212.191.92.88:51110/tft/review"; // the  url from where to fetch data(json)
-        RestTemplate restTemplate = new RestTemplate(true);
+		RestTemplate restTemplate = new RestTemplate();
 
         Review newReview = new Review();
 		newReview.setRestaurantName(arg[0]);

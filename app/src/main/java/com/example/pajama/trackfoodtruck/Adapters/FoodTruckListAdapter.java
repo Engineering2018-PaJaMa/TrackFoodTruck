@@ -10,7 +10,6 @@ import com.example.pajama.trackfoodtruck.httpUserController.HttpGetUser;
 import com.example.pajama.trackfoodtruck.httpUserController.HttpSetFavourite;
 
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,15 +61,26 @@ public class FoodTruckListAdapter extends ArrayAdapter
 		TextView cuisineTextField = rowView.findViewById(R.id.cuisineTextView);
 		RatingBar ratingBar = rowView.findViewById(R.id.ratingBar);
 		ImageView imageView = rowView.findViewById(R.id.foodTruckimageView);
-		ToggleButton favButton = (ToggleButton) rowView.findViewById(R.id.favouriteButton);
+		ToggleButton favButton = rowView.findViewById(R.id.favouriteButton);
 
 		nameTextField.setText(nameArray.get(position));
-		Log.e("QQQQQQQQ", nameArray.get(position));
 		infoTextField.setText(infoArray.get(position));
 		cuisineTextField.setText(cuisineArray.get(position));
 		ratingBar.setRating(raitingArray.get(position).floatValue());
 
-		favButton.setChecked(false);
+		try
+		{
+			if (new HttpGetUser().execute(LoginActivity.currentUserEmail).get().getFavouriteFoodTrucks().contains(nameArray.get(pos)))
+			{
+				favButton.setChecked(true);
+			}
+			else
+				favButton.setChecked(false);
+		}
+		catch (ExecutionException | InterruptedException e)
+		{
+			e.printStackTrace();
+		}
 
 		favButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
 		{

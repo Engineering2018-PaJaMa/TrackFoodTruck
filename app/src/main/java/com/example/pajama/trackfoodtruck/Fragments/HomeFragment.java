@@ -33,8 +33,6 @@ public class HomeFragment extends Fragment
 
 	ListView listView;
 
-	public static String choosenFoodTruck;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
