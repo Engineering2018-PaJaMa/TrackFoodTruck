@@ -46,7 +46,8 @@ public class User {
 	{
 		this._id = _id;
 	}
-    public String getLogin() {
+
+	public String getLogin() {
         return login;
     }
 

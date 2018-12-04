@@ -7,6 +7,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
@@ -16,7 +17,7 @@ import com.example.pajama.trackfoodtruck.Data.UserProperties;
 
 import android.os.AsyncTask;
 
-public class HttpSetFavourite extends AsyncTask<String, Void, Boolean>
+public class HttpDeleteFavourite extends AsyncTask<String, Void, Boolean>
 {
 
 	@Override
@@ -29,7 +30,7 @@ public class HttpSetFavourite extends AsyncTask<String, Void, Boolean>
 	protected Boolean doInBackground(String... arg)
 	{
 		final String url = "http://192.168.1.101:8080/tft/user/favourites"; // the  url from where to fetch data(json)
-		RestTemplate restTemplate = new RestTemplate();
+		RestTemplate restTemplate = new RestTemplate(new SimpleClientHttpRequestFactory());
 		HttpHeaders requestHeaders = new HttpHeaders();
 
 		requestHeaders.setContentType(new MediaType("application", "json"));
@@ -37,16 +38,16 @@ public class HttpSetFavourite extends AsyncTask<String, Void, Boolean>
 		List<String> tmpList = new ArrayList<>();
 		tmpList.add(arg[1]);
 
-		UserProperties newFavFoodTruck = new UserProperties();
-		newFavFoodTruck.setName(arg[0]);
-		newFavFoodTruck.setFavouriteFoodTrucks(tmpList);
+		UserProperties delFavFoodTrack = new UserProperties();
+		delFavFoodTrack.setName(arg[0]);
+		delFavFoodTrack.setFavouriteFoodTrucks(tmpList);
 
-		HttpEntity<UserProperties> entity = new HttpEntity<>(newFavFoodTruck, requestHeaders);
+		HttpEntity<UserProperties> entity = new HttpEntity<>(delFavFoodTrack);
 
 		restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 		restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
 
-		restTemplate.exchange(url, HttpMethod.PATCH, entity, User.class);
+		restTemplate.exchange(url, HttpMethod.DELETE, entity, User.class);
 
 		return true;
 	}
@@ -57,4 +58,3 @@ public class HttpSetFavourite extends AsyncTask<String, Void, Boolean>
 		super.onPostExecute(result);
 	}
 }
-

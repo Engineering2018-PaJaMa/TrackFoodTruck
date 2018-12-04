@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity implements ResponseErrorHan
 	TextView emailForm;
 	TextView passwordForm;
 	public static String currentLogInUser;
+	public static String currentUserEmail;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -59,6 +60,7 @@ public class LoginActivity extends AppCompatActivity implements ResponseErrorHan
 		else
 		{
 			currentLogInUser = userProcess.get().getLogin();
+			currentUserEmail = userProcess.get().getEmail();
 			Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
 			startActivity(intent);
 		}

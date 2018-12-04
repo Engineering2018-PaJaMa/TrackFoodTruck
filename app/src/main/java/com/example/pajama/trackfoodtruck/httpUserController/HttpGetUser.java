@@ -31,15 +31,21 @@ public class HttpGetUser extends AsyncTask<String, Void, User>
     @Override
 	protected User doInBackground(String... arg)
 	{
-        final String url = "http://212.191.92.88:51110/tft/user"; // the  url from where to fetch data(json) ip kompa
+		final String url = "http://192.168.1.101:8080/tft/user"; // the  url from where to fetch data(json) ip kompa
 
 		RestTemplate restTemplate = new RestTemplate();
-
 
 		JSONObject newUser = null;
 		try
 		{
-			newUser = new JSONObject().put("password", arg[1]).put("email", arg[0]);
+			if (arg.length == 1)
+			{
+				newUser = new JSONObject().put("email", arg[0]);
+			}
+			else
+			{
+				newUser = new JSONObject().put("password", arg[1]).put("email", arg[0]);
+			}
 		}
 		catch (JSONException e)
 		{
@@ -60,7 +66,9 @@ public class HttpGetUser extends AsyncTask<String, Void, User>
 
 		try
 		{
-			return restTemplate.postForObject(url, requestEntity, User.class);
+			User backUser = restTemplate.postForObject(url, requestEntity, User.class);
+			Log.e("qqqwww", backUser.getFavouriteFoodTrucks().toString());
+			return backUser;
 		}
 		catch (HttpServerErrorException e)
 		{
