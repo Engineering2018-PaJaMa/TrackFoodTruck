@@ -52,8 +52,9 @@ public class LoginActivity extends AppCompatActivity implements ResponseErrorHan
 		Log.i(" Password: ", password);
 
 		HttpGetUser userProcess = new HttpGetUser();
+		userProcess.execute(email, password);
 
-		if (userProcess.execute(email, password).get().getErrorMsg().equals(500))
+		if (userProcess.get().getErrorMsg().equals(500))
 		{
 			Toast.makeText(getApplicationContext(), "Can't find such user", Toast.LENGTH_SHORT).show();
 		}

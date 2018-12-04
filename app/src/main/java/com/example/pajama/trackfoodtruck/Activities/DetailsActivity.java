@@ -8,7 +8,6 @@ import com.example.pajama.trackfoodtruck.Adapters.PhotoViewAdapter;
 import com.example.pajama.trackfoodtruck.Adapters.ReviewListAdapter;
 import com.example.pajama.trackfoodtruck.Data.ApplicationData;
 import com.example.pajama.trackfoodtruck.Data.Review;
-import com.example.pajama.trackfoodtruck.Fragments.FavouriteFragment;
 import com.example.pajama.trackfoodtruck.Fragments.MapFragment;
 import com.example.pajama.trackfoodtruck.R;
 import com.example.pajama.trackfoodtruck.httpReviewsController.HttpGetReviews;
@@ -44,6 +43,7 @@ public class DetailsActivity extends AppCompatActivity
 	ArrayList<String> dateArray = new ArrayList<>();
 	ArrayList<String> authorArray = new ArrayList<>();
 	ArrayList<String> reviewArray = new ArrayList<>();
+	ArrayList<Float> raitingwArray = new ArrayList<>();
 	ListView listView;
 
 	@Override
@@ -61,8 +61,8 @@ public class DetailsActivity extends AppCompatActivity
 			{
 				authorArray.add(review.getAuthor());
 				reviewArray.add(review.getBody());
-				Log.e("www", review.getBody());
 				dateArray.add(review.getRating().toString());
+				raitingwArray.add(review.getRating());
 			}
 		}
 		catch (ExecutionException | InterruptedException e)
@@ -71,11 +71,11 @@ public class DetailsActivity extends AppCompatActivity
 		}
 
 		HttpGetTruck truckProcess = new HttpGetTruck();
-		truckProcess.execute(FavouriteFragment.choosenFoodTruck);
+		truckProcess.execute(ApplicationData.choosenTrack);
 
-		TextView nameTextField = findViewById(R.id.foodTruckNametextView);
-		TextView cuisineTextField = findViewById(R.id.foodTruckFoodTypetextView);
-		TextView descriptionTextField = findViewById(R.id.foodTruckDescriptiontextView);
+		TextView nameTextField = findViewById(R.id.foodTruckNameTextDetail);
+		TextView cuisineTextField = findViewById(R.id.foodTruckFoodTypeTextDetail);
+		TextView descriptionTextField = findViewById(R.id.foodTruckDescriptionTextDetail);
 		RatingBar ratingBar = findViewById(R.id.foodTruckDetailsratingBar);
 
 		try
@@ -107,7 +107,7 @@ public class DetailsActivity extends AppCompatActivity
 			}
 		});
 
-		ReviewListAdapter reviewListAdapter = new ReviewListAdapter(this, dateArray, authorArray, reviewArray);
+		ReviewListAdapter reviewListAdapter = new ReviewListAdapter(this, dateArray, authorArray, reviewArray, raitingwArray);
 		listView = (ListView) findViewById(R.id.reviewsList);
 		listView.setAdapter(reviewListAdapter);
 

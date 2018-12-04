@@ -16,36 +16,35 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:layout_gravity="center_vertical"
-			android:layout_weight="2"
 			android:gravity="center_vertical"
-			android:orientation="vertical" android:layout_marginLeft="10dp">
+			android:orientation="vertical" android:layout_marginLeft="10dp" android:layout_weight="1">
 
 		<LinearLayout
 				android:orientation="horizontal"
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content" android:layout_weight="1">
+				android:layout_height="match_parent" android:layout_weight="1">
 			<TextView
 					android:id="@+id/foodTruckNameTextView"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
 					android:textSize="24sp"
-					android:textStyle="bold" android:textColorLink="@color/Chocolate" android:textColor="@color/Chocolate"/>
+					android:textStyle="bold" android:textColorLink="@color/Chocolate" android:textColor="@color/Chocolate" android:layout_weight="1"/>
 			<ToggleButton
-					android:layout_width="wrap_content"
+					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:focusable="false"
-					android:id="@+id/favouriteButton" android:textOff="Add" android:textOn="Added"/>
+					android:id="@+id/favouriteButton" android:textOff="Add" android:textOn="Added" android:layout_weight="2"/>
 		</LinearLayout>
 
 		<TextView
 				android:id="@+id/foodTruckInfoTextView"
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:textSize="18sp" android:textColor="@color/Chocolate" android:textColorLink="@color/Chocolate" android:layout_weight="1"/>
+				android:layout_height="match_parent"
+				android:textSize="18sp" android:textColor="@color/Chocolate" android:textColorLink="@color/Chocolate" android:layout_weight="2"/>
 		<LinearLayout
 				android:orientation="horizontal"
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content" android:layout_weight="0">
+				android:layout_height="match_parent" android:layout_weight="2">
 			<TextView
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"

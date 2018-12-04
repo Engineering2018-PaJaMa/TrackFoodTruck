@@ -6,6 +6,7 @@ import java.util.concurrent.ExecutionException;
 import com.example.pajama.trackfoodtruck.Activities.LoginActivity;
 import com.example.pajama.trackfoodtruck.R;
 import com.example.pajama.trackfoodtruck.httpUserController.HttpDeleteFavourite;
+import com.example.pajama.trackfoodtruck.httpUserController.HttpGetUser;
 import com.example.pajama.trackfoodtruck.httpUserController.HttpSetFavourite;
 
 import android.support.v4.app.FragmentActivity;
@@ -28,11 +29,17 @@ public class FavouriteFoodTruckListAdapter extends ArrayAdapter
 	private final ArrayList<String> cuisineArray;
 	private final ArrayList<String> imageArray;
 	private final ArrayList<Double> raitingArray;
+	private Integer pos;
+	private HttpGetUser getUser;
 
 	public FavouriteFoodTruckListAdapter(
 			FragmentActivity context,
 			ArrayList<String> nameArrayParam,
-			ArrayList<String> infoArrayParam, ArrayList<String> imageArrayParam, ArrayList<String> cuisineArray, ArrayList<Double> raitingArray)
+			ArrayList<String> infoArrayParam,
+			ArrayList<String> imageArrayParam,
+			ArrayList<String> cuisineArray,
+			ArrayList<Double> raitingArray,
+			HttpGetUser getUser)
 	{
 
 		super(context,R.layout.listview_row , nameArrayParam);
@@ -43,6 +50,7 @@ public class FavouriteFoodTruckListAdapter extends ArrayAdapter
 		this.imageArray = imageArrayParam;
 		this.cuisineArray = cuisineArray;
 		this.raitingArray = raitingArray;
+		this.getUser = getUser;
 
 	}
 
@@ -50,6 +58,7 @@ public class FavouriteFoodTruckListAdapter extends ArrayAdapter
 	{
 		LayoutInflater inflater=context.getLayoutInflater();
 		View rowView=inflater.inflate(R.layout.listview_row, null,true);
+		pos = position;
 
 		TextView nameTextField = rowView.findViewById(R.id.foodTruckNameTextView);
 		TextView infoTextField = rowView.findViewById(R.id.foodTruckInfoTextView);
@@ -75,7 +84,11 @@ public class FavouriteFoodTruckListAdapter extends ArrayAdapter
 				{
 					if (isChecked)
 					{
-						if (new HttpSetFavourite().execute(LoginActivity.currentLogInUser, nameArray.get(position)).get())
+						if (getUser.get().getFavouriteFoodTrucks().contains(nameArray.get(pos)))
+						{
+							Toast.makeText(FavouriteFoodTruckListAdapter.super.getContext(), "Juz dodano do ulubionych", Toast.LENGTH_LONG).show();
+						}
+						else if (new HttpSetFavourite().execute(LoginActivity.currentLogInUser, nameArray.get(position)).get())
 						{
 							Toast.makeText(FavouriteFoodTruckListAdapter.super.getContext(), "Dodano do ulubionych", Toast.LENGTH_LONG).show();
 						}

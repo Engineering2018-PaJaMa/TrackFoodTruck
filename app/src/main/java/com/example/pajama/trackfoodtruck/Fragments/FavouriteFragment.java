@@ -85,8 +85,7 @@ public class FavouriteFragment extends Fragment
 				nameArray,
 				infoArray,
 				imageArray,
-				cuisineArray,
-				raitingArray);
+				cuisineArray, raitingArray, getUser);
 
 		listView = view.findViewById(R.id.favouriteListView);
 		listView.setAdapter(favouriteFoodTruckListAdapter);

@@ -30,14 +30,14 @@ public class FoodTruckListAdapter extends ArrayAdapter
 	private final ArrayList<String> imageArray;
 	private final ArrayList<Double> raitingArray;
 	private Integer pos;
+	private HttpGetUser getUser;
 
 	public FoodTruckListAdapter(
 			FragmentActivity context,
 			ArrayList<String> nameArrayParam,
 			ArrayList<String> infoArrayParam,
 			ArrayList<String> imageArrayParam,
-			ArrayList<String> cuisineArray,
-			ArrayList<Double> raitingArray)
+			ArrayList<String> cuisineArray, ArrayList<Double> raitingArray, HttpGetUser getUser)
 	{
 
 		super(context,R.layout.listview_row , nameArrayParam);
@@ -48,6 +48,7 @@ public class FoodTruckListAdapter extends ArrayAdapter
 		this.imageArray = imageArrayParam;
 		this.cuisineArray = cuisineArray;
 		this.raitingArray = raitingArray;
+		this.getUser = getUser;
 
 	}
 
@@ -56,6 +57,7 @@ public class FoodTruckListAdapter extends ArrayAdapter
 		LayoutInflater inflater=context.getLayoutInflater();
 		View rowView=inflater.inflate(R.layout.listview_row, null,true);
 		pos = position;
+
 		TextView nameTextField = rowView.findViewById(R.id.foodTruckNameTextView);
 		TextView infoTextField = rowView.findViewById(R.id.foodTruckInfoTextView);
 		TextView cuisineTextField = rowView.findViewById(R.id.cuisineTextView);
@@ -70,7 +72,7 @@ public class FoodTruckListAdapter extends ArrayAdapter
 
 		try
 		{
-			if (new HttpGetUser().execute(LoginActivity.currentUserEmail).get().getFavouriteFoodTrucks().contains(nameArray.get(pos)))
+			if (getUser.get().getFavouriteFoodTrucks().contains(nameArray.get(pos)))
 			{
 				favButton.setChecked(true);
 			}
@@ -91,7 +93,7 @@ public class FoodTruckListAdapter extends ArrayAdapter
 				{
 					if (isChecked)
 					{
-						if (new HttpGetUser().execute(LoginActivity.currentUserEmail).get().getFavouriteFoodTrucks().contains(nameArray.get(pos)))
+						if (getUser.get().getFavouriteFoodTrucks().contains(nameArray.get(pos)))
 						{
 							Toast.makeText(FoodTruckListAdapter.super.getContext(), "Juz dodano do ulubionych", Toast.LENGTH_LONG).show();
 						}

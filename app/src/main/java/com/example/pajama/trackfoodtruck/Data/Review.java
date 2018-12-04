@@ -9,7 +9,7 @@ public class Review
 	private String restaurantName;
 	private String headline;
 	private String body;
-	private Double rating;
+	private Float rating;
 	private String author;
 
 	public String getRestaurantName()
@@ -52,12 +52,12 @@ public class Review
 		this.body = body;
 	}
 
-	public Double getRating()
+	public Float getRating()
 	{
 		return rating;
 	}
 
-	public void setRating(Double rating)
+	public void setRating(Float rating)
 	{
 		this.rating = rating;
 	}
